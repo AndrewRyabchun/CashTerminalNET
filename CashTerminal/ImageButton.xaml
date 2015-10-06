@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="CashTerminal.ImageButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CashTerminal"
+             mc:Ignorable="d" 
+             d:DesignHeight="70" d:DesignWidth="70">
+    <Grid>
+        <Button x:Name="button" Width="70" BorderThickness="1" BorderBrush="White" HorizontalAlignment="Right" Height="70" Margin="0" VerticalAlignment="Bottom">
+            <StackPanel Width="64" Height="64">
+                <Image x:Name="image" Height="32" Width="32" Margin="0,8,0,0"/>
+                <Label x:Name="label" Content="Label" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Button>
+
+    </Grid>
+</UserControl>
