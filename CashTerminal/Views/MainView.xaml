@@ -4,20 +4,23 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CashTerminal"
-        xmlns:viewModel="clr-namespace:CashTerminal.ViewModel" x:Class="CashTerminal.MainWindow"
+        xmlns:vm="clr-namespace:CashTerminal.ViewModels"
+        xmlns:v="clr-namespace:CashTerminal.Views"
+        xmlns:c="clr-namespace:CashTerminal.Commons"
+        x:Class="CashTerminal.Views.MainView"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="800" 
         ResizeMode="CanResizeWithGrip" MinWidth="811" MinHeight="600"
         Visibility="Visible" FontSize="16">
+    <Window.DataContext>
+        <vm:MainViewModel/>
+    </Window.DataContext>
     <Window.Background>
         <SolidColorBrush Color="{StaticResource Gray1}"/>
     </Window.Background>
     <Window.Foreground>
         <SolidColorBrush Color="{StaticResource BlueColor}"/>
     </Window.Foreground>
-    <Window.DataContext>
-        <viewModel:MainWindowViewModel/>
-    </Window.DataContext>
     <Grid Margin="0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
@@ -52,7 +55,7 @@
                     </TextBlock>
                 </StackPanel>
             </Button>
-            <Button Style="{StaticResource ResourceKey=ReversedButtonStyle}" Height="70" HorizontalAlignment="Left" Margin="10,0,0,0">
+            <Button Style="{StaticResource ResourceKey=ReversedButtonStyle}" Height="70" HorizontalAlignment="Left" Margin="10,0,0,0" Command="{Binding UnlockCommand}">
                 <StackPanel Orientation="Vertical">
                     <ContentControl Width="32" Height="32" Margin="4" Content="{StaticResource ResourceKey=LockIcon}" IsEnabled="False"/>
                     <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Заблокировать">
@@ -62,7 +65,7 @@
                     </TextBlock>
                 </StackPanel>
             </Button>
-            <Button Style="{StaticResource ResourceKey=ReversedButtonStyle}" Height="70" HorizontalAlignment="Left" Margin="10,0,0,0">
+            <Button Style="{StaticResource ResourceKey=ReversedButtonStyle}" Height="70" HorizontalAlignment="Left" Margin="10,0,0,0" Command="{Binding LoginCommand}">
                 <StackPanel Orientation="Vertical">
                     <ContentControl Width="32" Height="32" Margin="4" Content="{StaticResource ResourceKey=LogoutIcon}" IsEnabled="False"/>
                     <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Выйти">
@@ -82,7 +85,14 @@
                     </TextBlock>
                 </StackPanel>
             </Button>
-            <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,50,0" DockPanel.Dock="Right" Foreground="#FFE6E6DC" Text="{Binding UserName}" />
+            <Grid DockPanel.Dock="Right" HorizontalAlignment="Right" Width="237">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFE6E6DC" Text="{Binding UserName}" Margin="0" />
+                <TextBlock HorizontalAlignment="Center" Grid.Row="1" TextWrapping="Wrap" Text="{Binding Uptime}" Foreground="#FFE6E6DC" VerticalAlignment="Center" Margin="0"/>
+            </Grid>
         </DockPanel>
         <Grid Margin="0" Grid.Row="1">
             <Grid.RowDefinitions>
@@ -102,14 +112,15 @@
             </StackPanel>
             <DataGrid x:Name="dataGrid" VerticalContentAlignment="Stretch" Margin="10" Grid.Row="2" BorderBrush="#FF00628B" Background="White"/>
         </Grid>
-        <Grid Grid.Column="1" Margin="0" Grid.Row="1">
+        <Grid Grid.Column="1" Margin="0" Grid.Row="1" Grid.RowSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="120"/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
+                <RowDefinition Height="68*"/>
+                <RowDefinition Height="68*"/>
+                <RowDefinition Height="68*"/>
+                <RowDefinition Height="68*"/>
+                <RowDefinition Height="55*"/>
+                <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
             <Grid.Background>
                 <SolidColorBrush Color="{StaticResource Gray2}"/>
@@ -179,7 +190,7 @@
                 </Grid>
 
             </Button>
-            <Button Style="{StaticResource ButtonStyle}" Margin="0,5,0,10" Grid.Row="5" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" FontSize="24">
+            <Button Style="{StaticResource ButtonStyle}" Margin="0,5,0,0" Grid.Row="5" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" FontSize="24">
                 <Grid Margin="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -196,6 +207,20 @@
 
             </Button>
         </Grid>
-        <StatusBar Grid.Row="2" Grid.ColumnSpan="2"/>
+        <Grid x:Name="overlay" Visibility="{Binding OverlayVisibility}"  Margin="0" Grid.RowSpan="3" Background="#7F000000" Grid.ColumnSpan="2">
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Grid.Background>
+                    <SolidColorBrush Color="{StaticResource BlueColor}"></SolidColorBrush>
+                </Grid.Background>
+                <Grid></Grid>
+                <ItemsControl ItemsSource="{Binding OverlayedControl}">
+                    <ItemsControl.ItemTemplateSelector>
+                        <c:OverlayTemplateSelector 
+                            UnlockOverlayTemplate="{StaticResource UnlockOverlay}" 
+                            LoginOverlayTemplate="{StaticResource LoginOverlay}"/>
+                    </ItemsControl.ItemTemplateSelector>
+                </ItemsControl>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>

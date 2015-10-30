@@ -2,12 +2,13 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:CashTerminal"
-             StartupUri="View/MainWindow.xaml">
+             StartupUri="Views/MainView.xaml">
     <Application.Resources>
          <ResourceDictionary>
              <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Assets/Style.xaml"/>
                 <ResourceDictionary Source="Assets/Icons.xaml"/>
+                <ResourceDictionary Source="Assets/OverlayTemplates.xaml"/>
             </ResourceDictionary.MergedDictionaries>
          </ResourceDictionary>
     </Application.Resources>

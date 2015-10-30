@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:CashTerminal.View">
+                    xmlns:local="clr-namespace:CashTerminal.Views">
     <Color x:Key="BlueColor">#00628B</Color>
     <Color x:Key="Gray1">#E6E6DC</Color>
     <Color x:Key="Gray2">#DDDDD0</Color>
@@ -31,6 +31,8 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Foreground" Value="#333333" />
+                            <Setter Property="Background" Value="#dddddd" />
+                            <Setter Property="BorderBrush" Value="Red"/>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Background" Value="#dddddd" />

@@ -6,15 +6,10 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CashTerminal.ViewModel
+namespace CashTerminal.Commons
 {
-    class MainWindowViewModel : INotifyPropertyChanged
+    class ViewModelBase : INotifyPropertyChanged
     {
-        public string UserName {
-            get { return "Пользователь: " + Environment.UserName; }
-        }
-
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
