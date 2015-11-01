@@ -49,4 +49,37 @@
             </ContentControl>
         </Grid>
     </DataTemplate>
+
+    <DataTemplate x:Key="SettingsOverlay">
+        <Grid Margin="10">
+            <ContentControl Margin="0">
+                <ContentControl.Foreground>
+                    <SolidColorBrush Color="{StaticResource Gray1}"/>
+                </ContentControl.Foreground>
+                <StackPanel>
+                    <TextBlock HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="Настройки" VerticalAlignment="Top" FontSize="21.333"/>
+                    <Grid Margin="0,20,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="80"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock TextWrapping="Wrap" Text="Последовательный порт для сканера" VerticalAlignment="Center" Margin="0,7"/>
+                        <ComboBox Background="White" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="0,4" ItemsSource="{Binding SerialPortList}" SelectedItem="{Binding ScannerPort}"/>
+                        <TextBlock TextWrapping="Wrap" Text="Последовательный порт для принтера" Grid.Row="1"
+                                   Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,7" />
+                        <ComboBox Background="White" Grid.Column="1" VerticalAlignment="Center" Grid.Row="1" Margin="0,4" ItemsSource="{Binding SerialPortList}" SelectedItem="{Binding PrinterPort}"/>
+                        <TextBlock TextWrapping="Wrap" Text="Номер кассы" HorizontalAlignment="Left" Margin="0" Grid.Row="2"
+                                   Grid.Column="0" VerticalAlignment="Center"/>
+                        <TextBox Grid.Column="1" Margin="0" Height="30" Grid.Row="2" Text="{Binding TerminalNumber}"/>
+                    </Grid>
+                    <Button Style="{StaticResource ButtonStyle}" Content="Сохранить" Margin="0,20,0,0" HorizontalAlignment="Right" Foreground="#FF00628B" Command="{Binding SaveCommand}"/>
+                </StackPanel>
+            </ContentControl>
+        </Grid>
+    </DataTemplate>
 </ResourceDictionary>
