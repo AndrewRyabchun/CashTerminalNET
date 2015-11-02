@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CashTerminal.Commons;
 using System.IO.Ports;
 using System.Windows.Input;
+using CashTerminal.Models.Data;
 
 namespace CashTerminal.ViewModels
 {
@@ -37,20 +39,24 @@ namespace CashTerminal.ViewModels
         {
             _parent = parent;
             SaveCommand=new RelayCommand(Save, IsValidTerminalNumber);
-            var portnames = SerialPort.GetPortNames();
-            SerialPortList=new ObservableCollection<string>(portnames);
+            SerialPortList=new ObservableCollection<string>(_parent.Settings.PortNames);
+            PrinterPort = _parent.Settings.PrinterPort;
+            ScannerPort = _parent.Settings.ScannerPort;
+            _terminalNumber = _parent.Settings.TerminalNumber;
         }
 
         private void Save(object obj)
         {
+            _parent.Settings.PrinterPort = PrinterPort;
+            _parent.Settings.ScannerPort = ScannerPort;
+            _parent.Settings.TerminalNumber = _terminalNumber;
             _parent.CloseOverlay();
         }
 
         private bool IsValidTerminalNumber(object obj)
         {
             int _;
-            var a = int.TryParse(TerminalNumber, out _);
-            return a;
+            return int.TryParse(TerminalNumber, out _);
         }
 
         public override string ToString()

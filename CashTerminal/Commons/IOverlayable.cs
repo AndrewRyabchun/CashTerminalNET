@@ -7,5 +7,7 @@ namespace CashTerminal.Commons
         void CloseOverlay();
 
         SessionTimer Timer { get; }
+
+        SettingsManager Settings { get; }
     }
 }

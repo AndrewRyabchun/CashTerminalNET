@@ -99,30 +99,29 @@
     <Compile Include="Commons\PasswordBehavior.cs" />
     <Compile Include="Commons\RelayCommand.cs" />
     <Compile Include="Commons\ViewModelBase.cs" />
-    <Compile Include="Models\Article.cs" />
-    <Compile Include="Models\CashMemo.cs" />
     <Compile Include="Models\Data\Article.cs">
-      <DependentUpon>SupermarketDbModel.tt</DependentUpon>
+      <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Data\SupermarketDbModel.Context.cs">
+    <Compile Include="Models\Data\DataModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SupermarketDbModel.Context.tt</DependentUpon>
+      <DependentUpon>DataModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Data\SupermarketDbModel.cs">
+    <Compile Include="Models\Data\DataModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SupermarketDbModel.tt</DependentUpon>
+      <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Data\SupermarketDbModel.Designer.cs">
+    <Compile Include="Models\Data\DataModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SupermarketDbModel.edmx</DependentUpon>
+      <DependentUpon>DataModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Data\User.cs">
-      <DependentUpon>SupermarketDbModel.tt</DependentUpon>
+      <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SessionTimer.cs" />
+    <Compile Include="Models\SettingsManager.cs" />
     <Compile Include="ViewModels\LoginControlViewModel.cs" />
     <Compile Include="ViewModels\SettingsControlViewModel.cs" />
     <Compile Include="ViewModels\UnlockControlViewModel.cs" />
@@ -143,13 +142,13 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <EntityDeploy Include="Models\Data\SupermarketDbModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SupermarketDbModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
     <None Include="ClassDiagram.cd" />
-    <None Include="Models\Data\SupermarketDbModel.edmx.diagram">
-      <DependentUpon>SupermarketDbModel.edmx</DependentUpon>
+    <EntityDeploy Include="Models\Data\DataModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DataModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Models\Data\DataModel.edmx.diagram">
+      <DependentUpon>DataModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <AppDesigner Include="Properties\" />
@@ -163,15 +162,15 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Models\Data\SupermarketDbModel.Context.tt">
+    <Content Include="Models\Data\DataModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SupermarketDbModel.edmx</DependentUpon>
-      <LastGenOutput>SupermarketDbModel.Context.cs</LastGenOutput>
+      <DependentUpon>DataModel.edmx</DependentUpon>
+      <LastGenOutput>DataModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\Data\SupermarketDbModel.tt">
+    <Content Include="Models\Data\DataModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SupermarketDbModel.edmx</DependentUpon>
-      <LastGenOutput>SupermarketDbModel.cs</LastGenOutput>
+      <DependentUpon>DataModel.edmx</DependentUpon>
+      <LastGenOutput>DataModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

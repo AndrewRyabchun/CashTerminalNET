@@ -35,7 +35,7 @@
                     <SolidColorBrush Color="{StaticResource Gray1}"/>
                 </ContentControl.Foreground>
                 <StackPanel Width="300">
-                    <TextBlock HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="Настройки" VerticalAlignment="Top" FontSize="21.333"/>
+                    <TextBlock HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="Журнал событий" VerticalAlignment="Top" FontSize="21.333"/>
                     <Grid Margin="0,20,0,0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="30"/>

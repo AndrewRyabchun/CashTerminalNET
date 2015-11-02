@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Configuration;
+using System.Data.Entity;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -19,7 +20,7 @@ namespace CashTerminal.ViewModels
     internal class MainViewModel : ViewModelBase, IOverlayable
     {
         public string UserName => "Пользователь: " + Environment.UserName;
-        public string Uptime => "Время сеанса: " + _timer.SessionTime.ToString(@"hh\:mm\:ss");
+        public string Uptime => "Время сеанса: " + Timer.SessionTime.ToString(@"hh\:mm\:ss");
 
         private ObservableCollection<ViewModelBase> _overlayedControl;
         public ObservableCollection<ViewModelBase> OverlayedControl
@@ -51,22 +52,27 @@ namespace CashTerminal.ViewModels
         public ICommand LockCommand { get; set; }
         public ICommand SettingsCommand { get; set; }
 
-        private readonly SessionTimer _timer;
-        public SessionTimer Timer => _timer;
+        public SessionTimer Timer { get; }
+        public SettingsManager Settings { get; }
+
+        //public MainModel Model { get; }
 
         public string TotalValue => $"{0m:F} грн.";
 
         public MainViewModel()
         {
-            _timer=new SessionTimer();
-            _timer.PropertyChanged += (sender, args) => {OnPropertyChanged("Uptime"); };
+            Timer=new SessionTimer();
+            Timer.PropertyChanged += (sender, args) => {OnPropertyChanged("Uptime"); };
 
+            Settings=new SettingsManager();
+
+            //init commands
             LogoffCommand=new RelayCommand(Logoff);
             LockCommand=new RelayCommand(Lock);
             SettingsCommand=new RelayCommand(ShowSettings);
 
-            //_overlayedControl= new ObservableCollection<ViewModelBase> { new LoginControlViewModel(this) };
-            _overlayedControl = new ObservableCollection<ViewModelBase> { new SettingsControlViewModel(this)};
+            //show login overlay
+            _overlayedControl= new ObservableCollection<ViewModelBase> { new LoginControlViewModel(this) };
         }
 
         

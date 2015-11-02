@@ -110,7 +110,16 @@
                     </TextBox.BorderBrush>
                 </TextBox>
             </StackPanel>
-            <DataGrid x:Name="dataGrid" VerticalContentAlignment="Stretch" Margin="10" Grid.Row="2" BorderBrush="#FF00628B" Background="White"/>
+            <DataGrid x:Name="dataGrid" VerticalContentAlignment="Stretch" Margin="10" Grid.Row="2" BorderBrush="#FF00628B" Background="White" FontSize="13.333" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="0.5*" Header="№" CanUserSort="False"/>
+                    <DataGridTextColumn Width="1.5*" Header="Код" CanUserSort="False"/>
+                    <DataGridTextColumn Width="3*" Header="Название" CanUserSort="False"/>
+                    <DataGridTextColumn Width="1.5*" Header="Цена" CanUserSort="False"/>
+                    <DataGridTextColumn Width="1.5*" Header="Количество" CanUserSort="False"/>
+                    <DataGridTextColumn Width="1.5*" Header="Стоимость" CanUserSort="False"/>
+                </DataGrid.Columns>
+            </DataGrid>
         </Grid>
         <Grid Grid.Column="1" Margin="0" Grid.Row="1" Grid.RowSpan="2">
             <Grid.RowDefinitions>

@@ -25,7 +25,7 @@ namespace CashTerminal.Models.Data
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Article> Articles { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }

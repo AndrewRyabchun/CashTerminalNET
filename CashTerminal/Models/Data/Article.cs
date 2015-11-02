@@ -14,9 +14,8 @@ namespace CashTerminal.Models.Data
     
     public partial class Article
     {
-        public int Id { get; set; }
+        public long ID { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }
-        public double Discount { get; set; }
     }
 }
