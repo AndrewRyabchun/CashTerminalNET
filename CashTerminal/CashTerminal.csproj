@@ -82,10 +82,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UnlockContol.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\MainView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -122,12 +118,11 @@
     </Compile>
     <Compile Include="Models\SessionTimer.cs" />
     <Compile Include="Models\SettingsManager.cs" />
+    <Compile Include="ViewModels\LoggerControlViewModel.cs" />
     <Compile Include="ViewModels\LoginControlViewModel.cs" />
+    <Compile Include="ViewModels\SearchControlViewModel.cs" />
     <Compile Include="ViewModels\SettingsControlViewModel.cs" />
     <Compile Include="ViewModels\UnlockControlViewModel.cs" />
-    <Compile Include="Views\UnlockContol.xaml.cs">
-      <DependentUpon>UnlockContol.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>

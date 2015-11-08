@@ -15,6 +15,8 @@ namespace CashTerminal.Commons
         public DataTemplate UnlockOverlayTemplate { get; set; }
         public DataTemplate LoginOverlayTemplate { get; set; }
         public DataTemplate SettingsOverlayTemplate { get; set; }
+        public DataTemplate LoggerOverlayTemplate { get; set; }
+        public DataTemplate SearchOverlayTemplate { get; set; }
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
@@ -27,7 +29,10 @@ namespace CashTerminal.Commons
                     return LoginOverlayTemplate;
                 case "SettingsControl":
                     return SettingsOverlayTemplate;
-
+                case "LoggerControl":
+                    return LoggerOverlayTemplate;
+                case "SearchControl":
+                    return SearchOverlayTemplate;
             }
             return null;
         }

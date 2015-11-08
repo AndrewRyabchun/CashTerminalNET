@@ -22,20 +22,16 @@ namespace CashTerminal.ViewModels
         public string UserName => "Пользователь: " + Environment.UserName;
         public string Uptime => "Время сеанса: " + Timer.SessionTime.ToString(@"hh\:mm\:ss");
 
-        private ObservableCollection<ViewModelBase> _overlayedControl;
-        public ObservableCollection<ViewModelBase> OverlayedControl
-        {
-            get
-            {
-                return _overlayedControl;
-            }
-            set
-            {
-                _overlayedControl = value;
-                OnPropertyChanged("OverlayVisibility");
-                OnPropertyChanged();
-            }
-        }
+        public ObservableCollection<ViewModelBase> OverlayedControl { get; }
+
+        #region Commands
+        public ICommand LogoffCommand { get; set; }
+        public ICommand LockCommand { get; set; }
+        public ICommand SettingsCommand { get; set; }
+        public ICommand LoggerCommand { get; set; }
+        public ICommand SearchCommand { get; set; }
+        #endregion
+
         public Visibility OverlayVisibility
         {
             get
@@ -47,15 +43,9 @@ namespace CashTerminal.ViewModels
                 OnPropertyChanged();
             }
         }
-
-        public ICommand LogoffCommand { get; set; }
-        public ICommand LockCommand { get; set; }
-        public ICommand SettingsCommand { get; set; }
-
         public SessionTimer Timer { get; }
         public SettingsManager Settings { get; }
-
-        //public MainModel Model { get; }
+        public string LogText { get; }
 
         public string TotalValue => $"{0m:F} грн.";
 
@@ -70,33 +60,54 @@ namespace CashTerminal.ViewModels
             LogoffCommand=new RelayCommand(Logoff);
             LockCommand=new RelayCommand(Lock);
             SettingsCommand=new RelayCommand(ShowSettings);
+            LoggerCommand=new RelayCommand(ShowLog);
+            SearchCommand=new RelayCommand(ShowSearch);
 
             //show login overlay
-            _overlayedControl= new ObservableCollection<ViewModelBase> { new LoginControlViewModel(this) };
+            OverlayedControl= new ObservableCollection<ViewModelBase> { new LoginControlViewModel(this) };
         }
 
-        
+        #region CommandHandlers
         public void Logoff(object obj)
         {
-            if (OverlayedControl.Count<1)
-                OverlayedControl = new ObservableCollection<ViewModelBase> {new LoginControlViewModel(this)};
+            OverlayedControl.Clear();
+            OverlayedControl.Add(new LoginControlViewModel(this));
+            OnPropertyChanged("OverlayVisibility");
         }
 
         public void Lock(object obj)
         {
-            if (OverlayedControl.Count < 1)
-                OverlayedControl = new ObservableCollection<ViewModelBase> { new UnlockControlViewModel(this)};
+            OverlayedControl.Clear();
+            OverlayedControl.Add(new UnlockControlViewModel(this));
+            OnPropertyChanged("OverlayVisibility");
         }
 
         public void ShowSettings(object obj)
         {
-            if (OverlayedControl.Count < 1)
-                OverlayedControl = new ObservableCollection<ViewModelBase> { new SettingsControlViewModel(this) };
+            OverlayedControl.Clear();
+            OverlayedControl.Add(new SettingsControlViewModel(this));
+            OnPropertyChanged("OverlayVisibility");
         }
+
+        public void ShowLog(object obj)
+        {
+            OverlayedControl.Clear();
+            OverlayedControl.Add(new LoggerControlViewModel(this));
+            OnPropertyChanged("OverlayVisibility");
+        }
+
+        public void ShowSearch(object obj)
+        {
+            OverlayedControl.Clear();
+            OverlayedControl.Add(new SearchControlViewModel(this));
+            OnPropertyChanged("OverlayVisibility");
+        }
+        #endregion
 
         public void CloseOverlay()
         {
-            OverlayedControl=new ObservableCollection<ViewModelBase>();
+            OverlayedControl.Clear();
+            OnPropertyChanged("OverlayVisibility");
         }
 
         

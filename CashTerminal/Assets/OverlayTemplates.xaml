@@ -82,4 +82,58 @@
             </ContentControl>
         </Grid>
     </DataTemplate>
+    
+    <DataTemplate x:Key="LoggerOverlay">
+        <Grid Margin="10">
+            <ContentControl Margin="0">
+                <ContentControl.Foreground>
+                    <SolidColorBrush Color="{StaticResource Gray1}"/>
+                </ContentControl.Foreground>
+                <StackPanel Width="500" Height="500" >
+                    <TextBlock HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="Журнал событий" VerticalAlignment="Top" FontSize="21.333"/>
+                    <ScrollViewer Height="380" VerticalScrollBarVisibility="Auto" Margin="10,20,10,10">
+                        <TextBox FontSize="10" Text="{Binding LogText, Mode=OneWay}"/>
+                    </ScrollViewer>
+                    <DockPanel LastChildFill="False">
+                        <Button Style="{StaticResource ButtonStyle}" Content="Выйти" Margin="0,20,0,0" HorizontalAlignment="Right" Foreground="#FF00628B" DockPanel.Dock="Right" Command="{Binding CloseCommand}"/>
+                        <Button Style="{StaticResource ButtonStyle}" Content="Экспорт" Margin="0,20,20,0" HorizontalAlignment="Right" Foreground="#FF00628B" DockPanel.Dock="Right" Command="{Binding ExportCommand}"/>
+                    </DockPanel>
+                </StackPanel>
+            </ContentControl>
+        </Grid>
+    </DataTemplate>
+    
+    <DataTemplate x:Key="SearchOverlay">
+        <Grid Margin="10">
+            <ContentControl Margin="0">
+                <ContentControl.Foreground>
+                    <SolidColorBrush Color="{StaticResource Gray1}"/>
+                </ContentControl.Foreground>
+                <StackPanel Width="600" Height="410">
+                    <TextBlock HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="Поиск" VerticalAlignment="Top" FontSize="21.333"/>
+                    <TextBlock TextWrapping="Wrap" Text="Поиск по коду или названию:" Margin="0,20,0,0"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="100"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox TextWrapping="Wrap" BorderBrush="White" Margin="0,0,10,0"/>
+                        <Button Style="{StaticResource ButtonStyle}" Content="Искать" Margin="0" Foreground="#FF00628B" Command="{Binding SearchCommand}" Grid.Column="1"/>
+                    </Grid>
+                    <TextBlock TextWrapping="Wrap" Text="Результаты:" Margin="0,20,0,0"/>
+                    <DataGrid Height="200" ItemsSource="{Binding SearchResults}" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="1*" Header="Код" Binding="{Binding ID}"/>
+                            <DataGridTextColumn Width="5*" Header="Название" Binding="{Binding Name}"/>
+                            <DataGridTextColumn Width="1*" Header="Цена" Binding="{Binding Price}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <DockPanel LastChildFill="False">
+                        <Button Style="{StaticResource ButtonStyle}" Content="Выйти" Margin="0,30,0,0" HorizontalAlignment="Right" Foreground="#FF00628B" DockPanel.Dock="Right" Command="{Binding CloseCommand}"/>
+                        <Button Style="{StaticResource ButtonStyle}" Content="Добавить" Margin="0,30,20,0" HorizontalAlignment="Right" Foreground="#FF00628B" DockPanel.Dock="Right" Command="{Binding AddCommand}"/>
+                    </DockPanel>
+                </StackPanel>
+            </ContentControl>
+        </Grid>
+    </DataTemplate>
 </ResourceDictionary>

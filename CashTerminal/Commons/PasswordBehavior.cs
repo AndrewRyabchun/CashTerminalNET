@@ -17,7 +17,6 @@ namespace CashTerminal.Commons
             get { return (string)GetValue(PasswordProperty); }
             set { SetValue(PasswordProperty, value); }
         }
-
         protected override void OnAttached()
         {
             AssociatedObject.PasswordChanged += PasswordBox_PasswordChanged;

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,11 +36,12 @@ namespace CashTerminal.Commons
             }
 
             _execute = execute;
-            _canExecute = canExecute;
+            _canExecute = canExecute;            
         }
 
         public event EventHandler CanExecuteChanged
         {
+            
             add
             {
                 CommandManager.RequerySuggested += value;

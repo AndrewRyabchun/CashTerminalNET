@@ -9,5 +9,7 @@ namespace CashTerminal.Commons
         SessionTimer Timer { get; }
 
         SettingsManager Settings { get; }
+
+        string LogText { get; }
     }
 }
