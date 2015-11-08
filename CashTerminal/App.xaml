@@ -4,12 +4,12 @@
              xmlns:local="clr-namespace:CashTerminal"
              StartupUri="Views/MainView.xaml">
     <Application.Resources>
-         <ResourceDictionary>
-             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Assets/Style.xaml"/>
-                <ResourceDictionary Source="Assets/Icons.xaml"/>
-                <ResourceDictionary Source="Assets/OverlayTemplates.xaml"/>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Assets/Style.xaml" />
+                <ResourceDictionary Source="Assets/Icons.xaml" />
+                <ResourceDictionary Source="Assets/OverlayTemplates.xaml" />
             </ResourceDictionary.MergedDictionaries>
-         </ResourceDictionary>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

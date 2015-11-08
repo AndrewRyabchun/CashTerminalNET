@@ -6,11 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using CashTerminal.Commons;
-using CashTerminal.Models.Data;
+using CashTerminal.Data;
 
 namespace CashTerminal.ViewModels
 {
-    class SearchControlViewModel:ViewModelBase
+    internal class SearchControlViewModel : ViewModelBase
     {
         public string SearchPattern { get; set; }
         public ObservableCollection<Article> SearchResults { get; set; }
@@ -27,20 +27,18 @@ namespace CashTerminal.ViewModels
 
             _parent = parent;
 
-            AddCommand=new RelayCommand(Add);
-            SearchCommand= new RelayCommand(Search);
-            CloseCommand=new RelayCommand(Close);
+            AddCommand = new RelayCommand(Add);
+            SearchCommand = new RelayCommand(Search);
+            CloseCommand = new RelayCommand(Close);
         }
 
         private void Add(object obj)
         {
-            
         }
 
         private void Search(object obj)
         {
-            
-        } 
+        }
 
         private void Close(object obj)
         {

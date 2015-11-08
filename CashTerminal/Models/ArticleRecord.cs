@@ -1,11 +1,9 @@
 ﻿using System;
 using CashTerminal.Data;
-using System.Collections;
-using System.Collections.Generic;
 
-namespace CashTerminal.Model
+namespace CashTerminal.Models
 {
-    class ArticleRecord : Article
+    internal class ArticleRecord : Article
     {
         public ArticleRecord(Article sample)
         {

@@ -8,15 +8,17 @@ namespace CashTerminal.Commons
     public class PasswordBehavior : Behavior<PasswordBox>
     {
         public static readonly DependencyProperty PasswordProperty =
-            DependencyProperty.Register("Password", typeof(string), typeof(PasswordBehavior), new PropertyMetadata(default(string)));
+            DependencyProperty.Register("Password", typeof (string), typeof (PasswordBehavior),
+                new PropertyMetadata(default(string)));
 
         private bool _skipUpdate;
 
         public string Password
         {
-            get { return (string)GetValue(PasswordProperty); }
+            get { return (string) GetValue(PasswordProperty); }
             set { SetValue(PasswordProperty, value); }
         }
+
         protected override void OnAttached()
         {
             AssociatedObject.PasswordChanged += PasswordBox_PasswordChanged;

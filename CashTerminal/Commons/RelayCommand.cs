@@ -36,12 +36,11 @@ namespace CashTerminal.Commons
             }
 
             _execute = execute;
-            _canExecute = canExecute;            
+            _canExecute = canExecute;
         }
 
         public event EventHandler CanExecuteChanged
         {
-            
             add
             {
                 CommandManager.RequerySuggested += value;
@@ -72,7 +71,7 @@ namespace CashTerminal.Commons
 
         public void Destroy()
         {
-            _canExecute = _ => false;         
+            _canExecute = _ => false;
             _execute = _ => { };
         }
 

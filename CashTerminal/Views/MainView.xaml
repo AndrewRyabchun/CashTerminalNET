@@ -1,241 +1,276 @@
 ﻿<Window
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CashTerminal"
-        xmlns:vm="clr-namespace:CashTerminal.ViewModels"
-        xmlns:v="clr-namespace:CashTerminal.Views"
-        xmlns:c="clr-namespace:CashTerminal.Commons"
-        x:Class="CashTerminal.Views.MainView"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="800" 
-        ResizeMode="CanResizeWithGrip" MinWidth="811" MinHeight="600"
-        Visibility="Visible" FontSize="16">
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:CashTerminal"
+    xmlns:vm="clr-namespace:CashTerminal.ViewModels"
+    xmlns:v="clr-namespace:CashTerminal.Views"
+    xmlns:c="clr-namespace:CashTerminal.Commons"
+    x:Class="CashTerminal.Views.MainView"
+    mc:Ignorable="d"
+    Title="MainWindow" Height="600" Width="800"
+    ResizeMode="CanResizeWithGrip" MinWidth="811" MinHeight="600"
+    Visibility="Visible" FontSize="16">
     <Window.DataContext>
-        <vm:MainViewModel/>
+        <vm:MainViewModel />
     </Window.DataContext>
     <Window.Background>
-        <SolidColorBrush Color="{StaticResource Gray1}"/>
+        <SolidColorBrush Color="{StaticResource Gray1}" />
     </Window.Background>
     <Window.Foreground>
-        <SolidColorBrush Color="{StaticResource BlueColor}"/>
+        <SolidColorBrush Color="{StaticResource BlueColor}" />
     </Window.Foreground>
     <Grid Margin="0" d:IsLocked="True">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="70"/>
-            <RowDefinition/>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="70" />
+            <RowDefinition />
+            <RowDefinition Height="20" />
         </Grid.RowDefinitions>
         <DockPanel Grid.ColumnSpan="2" Margin="0">
             <DockPanel.Background>
-                <SolidColorBrush Color="{StaticResource BlueColor}"/>
+                <SolidColorBrush Color="{StaticResource BlueColor}" />
             </DockPanel.Background>
-            <Button Style="{StaticResource ReversedButtonStyle}" Height="70" HorizontalAlignment="Left" Margin="5,0,0,0" Padding="10,3" Command="{Binding SearchCommand}">
+            <Button Style="{StaticResource ReversedButtonStyle}" Height="70" HorizontalAlignment="Left"
+                    Margin="5,0,0,0" Padding="10,3" Command="{Binding SearchCommand}">
                 <StackPanel Orientation="Vertical">
-                    <ContentControl Width="32" Height="32" Margin="4" Content="{StaticResource SearchIcon}" IsEnabled="False"/>
+                    <ContentControl Width="32" Height="32" Margin="4" Content="{StaticResource SearchIcon}"
+                                    IsEnabled="False" />
                     <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Поиск">
                         <TextBlock.Foreground>
-                            <SolidColorBrush Color="{StaticResource Gray1}"/>
+                            <SolidColorBrush Color="{StaticResource Gray1}" />
                         </TextBlock.Foreground>
                     </TextBlock>
                 </StackPanel>
             </Button>
-            <Button Style="{StaticResource ResourceKey=ReversedButtonStyle}" Height="70" HorizontalAlignment="Left" Margin="5,0,0,0" Padding="10,3" Command="{Binding LoggerCommand}">
+            <Button Style="{StaticResource ResourceKey=ReversedButtonStyle}" Height="70" HorizontalAlignment="Left"
+                    Margin="5,0,0,0" Padding="10,3" Command="{Binding LoggerCommand}">
                 <StackPanel Orientation="Vertical">
-                    <ContentControl Width="32" Height="32" Margin="4" Content="{StaticResource LogIcon}" IsEnabled="False"/>
+                    <ContentControl Width="32" Height="32" Margin="4" Content="{StaticResource LogIcon}"
+                                    IsEnabled="False" />
                     <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Журнал">
                         <TextBlock.Foreground>
-                            <SolidColorBrush Color="{StaticResource Gray1}"/>
+                            <SolidColorBrush Color="{StaticResource Gray1}" />
                         </TextBlock.Foreground>
                     </TextBlock>
                 </StackPanel>
             </Button>
-            <Button Style="{StaticResource ResourceKey=ReversedButtonStyle}" Height="70" HorizontalAlignment="Left" Margin="5,0,0,0" Command="{Binding LockCommand}" Padding="10,3">
+            <Button Style="{StaticResource ResourceKey=ReversedButtonStyle}" Height="70" HorizontalAlignment="Left"
+                    Margin="5,0,0,0" Command="{Binding LockCommand}" Padding="10,3">
                 <StackPanel Orientation="Vertical">
-                    <ContentControl Width="32" Height="32" Margin="4" Content="{StaticResource ResourceKey=LockIcon}" IsEnabled="False"/>
+                    <ContentControl Width="32" Height="32" Margin="4" Content="{StaticResource ResourceKey=LockIcon}"
+                                    IsEnabled="False" />
                     <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Заблокировать">
                         <TextBlock.Foreground>
-                            <SolidColorBrush Color="{StaticResource Gray1}"/>
+                            <SolidColorBrush Color="{StaticResource Gray1}" />
                         </TextBlock.Foreground>
                     </TextBlock>
                 </StackPanel>
             </Button>
-            <Button Style="{StaticResource ResourceKey=ReversedButtonStyle}" Height="70" HorizontalAlignment="Left" Margin="5,0,0,0" Padding="10,3" Command="{Binding SettingsCommand}">
+            <Button Style="{StaticResource ResourceKey=ReversedButtonStyle}" Height="70" HorizontalAlignment="Left"
+                    Margin="5,0,0,0" Padding="10,3" Command="{Binding SettingsCommand}">
                 <StackPanel Orientation="Vertical">
-                    <ContentControl Width="32" Height="32" Margin="4" Content="{StaticResource SettingsIcon}" IsEnabled="False"/>
+                    <ContentControl Width="32" Height="32" Margin="4" Content="{StaticResource SettingsIcon}"
+                                    IsEnabled="False" />
                     <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Настройки">
                         <TextBlock.Foreground>
-                            <SolidColorBrush Color="{StaticResource Gray1}"/>
+                            <SolidColorBrush Color="{StaticResource Gray1}" />
                         </TextBlock.Foreground>
                     </TextBlock>
                 </StackPanel>
             </Button>
-            <Button Style="{StaticResource ResourceKey=ReversedButtonStyle}" Height="70" HorizontalAlignment="Right" Margin="10,0,0,0" Command="{Binding LogoffCommand}" DockPanel.Dock="Right">
+            <Button Style="{StaticResource ResourceKey=ReversedButtonStyle}" Height="70" HorizontalAlignment="Right"
+                    Margin="10,0,0,0" Command="{Binding LogoffCommand}" DockPanel.Dock="Right">
                 <StackPanel Orientation="Vertical">
-                    <ContentControl Width="32" Height="32" Margin="4" Content="{StaticResource ResourceKey=LogoutIcon}" IsEnabled="False"/>
+                    <ContentControl Width="32" Height="32" Margin="4" Content="{StaticResource ResourceKey=LogoutIcon}"
+                                    IsEnabled="False" />
                     <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Выйти">
                         <TextBlock.Foreground>
-                            <SolidColorBrush Color="{StaticResource Gray1}"/>
+                            <SolidColorBrush Color="{StaticResource Gray1}" />
                         </TextBlock.Foreground>
                     </TextBlock>
                 </StackPanel>
             </Button>
             <Grid HorizontalAlignment="Right" Width="200" DockPanel.Dock="Right">
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
+                    <RowDefinition />
+                    <RowDefinition />
                 </Grid.RowDefinitions>
-                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFE6E6DC" Text="{Binding UserName}" Margin="0" />
-                <TextBlock HorizontalAlignment="Center" Grid.Row="1" TextWrapping="Wrap" Text="{Binding Uptime}" Foreground="#FFE6E6DC" VerticalAlignment="Center" Margin="0"/>
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFE6E6DC"
+                           Text="{Binding UserName}" Margin="0" />
+                <TextBlock HorizontalAlignment="Center" Grid.Row="1" TextWrapping="Wrap" Text="{Binding Uptime}"
+                           Foreground="#FFE6E6DC" VerticalAlignment="Center" Margin="0" />
             </Grid>
         </DockPanel>
         <Grid Margin="0" Grid.Row="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="70"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition/>
+                <RowDefinition Height="70" />
+                <RowDefinition Height="50" />
+                <RowDefinition />
             </Grid.RowDefinitions>
-            <TextBlock TextWrapping="Wrap" Text="TOVAR PLACEHOLDER" Margin="0,10,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-            <TextBlock TextWrapping="Wrap" Text="count x price = value" Margin="0,0,10,5" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontWeight="Bold"/>
+            <TextBlock TextWrapping="Wrap" Text="TOVAR PLACEHOLDER" Margin="0,10,0,0" HorizontalAlignment="Center"
+                       VerticalAlignment="Top" />
+            <TextBlock TextWrapping="Wrap" Text="count x price = value" Margin="0,0,10,5" HorizontalAlignment="Right"
+                       VerticalAlignment="Bottom" FontWeight="Bold" />
             <StackPanel Margin="10,0" VerticalAlignment="Top" Grid.Row="1">
-                <TextBlock TextWrapping="Wrap" Text="Ручной ввод кода:" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0" FontSize="13.333"/>
+                <TextBlock TextWrapping="Wrap" Text="Ручной ввод кода:" HorizontalAlignment="Left"
+                           VerticalAlignment="Center" Margin="0" FontSize="13.333" />
                 <Grid Height="26">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="100" />
                     </Grid.ColumnDefinitions>
                     <TextBox TextWrapping="Wrap" Margin="0,0,10,0">
                         <TextBox.BorderBrush>
-                            <SolidColorBrush Color="{StaticResource BlueColor}"/>
+                            <SolidColorBrush Color="{StaticResource BlueColor}" />
                         </TextBox.BorderBrush>
                     </TextBox>
-                    <Button Style="{StaticResource ButtonStyle}" FontSize="13.333" Grid.Column="1" Content="Ввод" Foreground="#FF00628B"/>
+                    <Button Style="{StaticResource ButtonStyle}" FontSize="13.333" Grid.Column="1" Content="Ввод"
+                            Foreground="#FF00628B" />
                 </Grid>
             </StackPanel>
-            <DataGrid x:Name="dataGrid" VerticalContentAlignment="Stretch" Margin="10" Grid.Row="2" BorderBrush="#FF00628B" Background="White" FontSize="13.333" AutoGenerateColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False">
+            <DataGrid x:Name="dataGrid" VerticalContentAlignment="Stretch" Margin="10" Grid.Row="2"
+                      BorderBrush="#FF00628B" Background="White" FontSize="13.333" AutoGenerateColumns="False"
+                      CanUserResizeColumns="False" CanUserResizeRows="False">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Width="0.5*" Header="№" CanUserSort="False"/>
-                    <DataGridTextColumn Width="1.5*" Header="Код" CanUserSort="False"/>
-                    <DataGridTextColumn Width="3*" Header="Название" CanUserSort="False"/>
-                    <DataGridTextColumn Width="1.5*" Header="Цена" CanUserSort="False"/>
-                    <DataGridTextColumn Width="1.5*" Header="Количество" CanUserSort="False"/>
-                    <DataGridTextColumn Width="1.5*" Header="Стоимость" CanUserSort="False"/>
+                    <DataGridTextColumn Width="0.5*" Header="№" CanUserSort="False" />
+                    <DataGridTextColumn Width="1.5*" Header="Код" CanUserSort="False" />
+                    <DataGridTextColumn Width="3*" Header="Название" CanUserSort="False" />
+                    <DataGridTextColumn Width="1.5*" Header="Цена" CanUserSort="False" />
+                    <DataGridTextColumn Width="1.5*" Header="Количество" CanUserSort="False" />
+                    <DataGridTextColumn Width="1.5*" Header="Стоимость" CanUserSort="False" />
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
         <Grid Grid.Column="1" Margin="0" Grid.Row="1" Grid.RowSpan="2">
             <Grid.RowDefinitions>
-                <RowDefinition Height="120"/>
-                <RowDefinition Height="68*"/>
-                <RowDefinition Height="68*"/>
-                <RowDefinition Height="68*"/>
-                <RowDefinition Height="68*"/>
-                <RowDefinition Height="55*"/>
-                <RowDefinition Height="30"/>
+                <RowDefinition Height="120" />
+                <RowDefinition Height="68*" />
+                <RowDefinition Height="68*" />
+                <RowDefinition Height="68*" />
+                <RowDefinition Height="68*" />
+                <RowDefinition Height="55*" />
+                <RowDefinition Height="30" />
             </Grid.RowDefinitions>
             <Grid.Background>
-                <SolidColorBrush Color="{StaticResource Gray2}"/>
+                <SolidColorBrush Color="{StaticResource Gray2}" />
             </Grid.Background>
-            <TextBlock TextWrapping="Wrap" Text="{Binding TotalValue}"  FontSize="32" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <Button Style="{StaticResource ButtonStyle}" Margin="0,10,0,5" Grid.Row="1" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" FontSize="24">
+            <TextBlock TextWrapping="Wrap" Text="{Binding TotalValue}" FontSize="32" Margin="0"
+                       HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <Button Style="{StaticResource ButtonStyle}" Margin="0,10,0,5" Grid.Row="1"
+                    HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" FontSize="24">
                 <Grid Margin="0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="0.5*"/>
-                        <ColumnDefinition Width="3.5*"/>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="0.5*" />
+                        <ColumnDefinition Width="3.5*" />
                     </Grid.ColumnDefinitions>
-                    <ContentControl Margin="0,5" Content="{StaticResource CartCheckoutIcon}" ClipToBounds="True" IsEnabled="False" />
-                    <TextBlock Text="Оплата" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="2">
+                    <ContentControl Margin="0,5" Content="{StaticResource CartCheckoutIcon}" ClipToBounds="True"
+                                    IsEnabled="False" />
+                    <TextBlock Text="Оплата" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Center"
+                               Grid.Column="2">
                         <TextBlock.Foreground>
-                            <SolidColorBrush Color="{StaticResource BlueColor}"/>
+                            <SolidColorBrush Color="{StaticResource BlueColor}" />
                         </TextBlock.Foreground>
                     </TextBlock>
                 </Grid>
 
             </Button>
-            <Button Style="{StaticResource ButtonStyle}" Margin="0,5" Grid.Row="2" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" FontSize="24">
+            <Button Style="{StaticResource ButtonStyle}" Margin="0,5" Grid.Row="2" HorizontalContentAlignment="Stretch"
+                    VerticalContentAlignment="Stretch" FontSize="24">
                 <Grid Margin="0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="0.5*"/>
-                        <ColumnDefinition Width="3.5*"/>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="0.5*" />
+                        <ColumnDefinition Width="3.5*" />
                     </Grid.ColumnDefinitions>
-                    <ContentControl Margin="0,5" Content="{StaticResource CartAddIcon}" ClipToBounds="True" IsEnabled="False" />
-                    <TextBlock Text="Количество" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="2">
+                    <ContentControl Margin="0,5" Content="{StaticResource CartAddIcon}" ClipToBounds="True"
+                                    IsEnabled="False" />
+                    <TextBlock Text="Количество" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Center"
+                               Grid.Column="2">
                         <TextBlock.Foreground>
-                            <SolidColorBrush Color="{StaticResource BlueColor}"/>
+                            <SolidColorBrush Color="{StaticResource BlueColor}" />
                         </TextBlock.Foreground>
                     </TextBlock>
                 </Grid>
 
             </Button>
-            <Button Style="{StaticResource ButtonStyle}" Margin="0,5" Grid.Row="3" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" FontSize="24">
+            <Button Style="{StaticResource ButtonStyle}" Margin="0,5" Grid.Row="3" HorizontalContentAlignment="Stretch"
+                    VerticalContentAlignment="Stretch" FontSize="24">
                 <Grid Margin="0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="0.5*"/>
-                        <ColumnDefinition Width="3.5*"/>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="0.5*" />
+                        <ColumnDefinition Width="3.5*" />
                     </Grid.ColumnDefinitions>
-                    <ContentControl Margin="0,5" Content="{StaticResource CartDeleteIcon}" ClipToBounds="True" IsEnabled="False" />
-                    <TextBlock Text="Удалить" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="2">
+                    <ContentControl Margin="0,5" Content="{StaticResource CartDeleteIcon}" ClipToBounds="True"
+                                    IsEnabled="False" />
+                    <TextBlock Text="Удалить" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Center"
+                               Grid.Column="2">
                         <TextBlock.Foreground>
-                            <SolidColorBrush Color="{StaticResource BlueColor}"/>
+                            <SolidColorBrush Color="{StaticResource BlueColor}" />
                         </TextBlock.Foreground>
                     </TextBlock>
                 </Grid>
 
             </Button>
-            <Button Style="{StaticResource ButtonStyle}" Margin="0,5" Grid.Row="4" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" FontSize="24">
+            <Button Style="{StaticResource ButtonStyle}" Margin="0,5" Grid.Row="4" HorizontalContentAlignment="Stretch"
+                    VerticalContentAlignment="Stretch" FontSize="24">
                 <Grid Margin="0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="0.5*"/>
-                        <ColumnDefinition Width="3.5*"/>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="0.5*" />
+                        <ColumnDefinition Width="3.5*" />
                     </Grid.ColumnDefinitions>
-                    <ContentControl Margin="0,5" Content="{StaticResource UpArrowIcon}" ClipToBounds="True" IsEnabled="False" />
-                    <TextBlock Text="Вверх" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="2">
+                    <ContentControl Margin="0,5" Content="{StaticResource UpArrowIcon}" ClipToBounds="True"
+                                    IsEnabled="False" />
+                    <TextBlock Text="Вверх" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Center"
+                               Grid.Column="2">
                         <TextBlock.Foreground>
-                            <SolidColorBrush Color="{StaticResource BlueColor}"/>
+                            <SolidColorBrush Color="{StaticResource BlueColor}" />
                         </TextBlock.Foreground>
                     </TextBlock>
                 </Grid>
 
             </Button>
-            <Button Style="{StaticResource ButtonStyle}" Margin="0,5,0,0" Grid.Row="5" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" FontSize="24">
+            <Button Style="{StaticResource ButtonStyle}" Margin="0,5,0,0" Grid.Row="5"
+                    HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" FontSize="24">
                 <Grid Margin="0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="0.5*"/>
-                        <ColumnDefinition Width="3.5*"/>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="0.5*" />
+                        <ColumnDefinition Width="3.5*" />
                     </Grid.ColumnDefinitions>
-                    <ContentControl Margin="0,5" Content="{StaticResource DownArrowIcon}" ClipToBounds="True" IsEnabled="False" />
-                    <TextBlock Text="Вниз" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="2">
+                    <ContentControl Margin="0,5" Content="{StaticResource DownArrowIcon}" ClipToBounds="True"
+                                    IsEnabled="False" />
+                    <TextBlock Text="Вниз" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Center"
+                               Grid.Column="2">
                         <TextBlock.Foreground>
-                            <SolidColorBrush Color="{StaticResource BlueColor}"/>
+                            <SolidColorBrush Color="{StaticResource BlueColor}" />
                         </TextBlock.Foreground>
                     </TextBlock>
                 </Grid>
 
             </Button>
         </Grid>
-        <Grid x:Name="overlay" Visibility="{Binding OverlayVisibility}"  Margin="0" Grid.RowSpan="3" Background="#7F000000" Grid.ColumnSpan="2">
+        <Grid x:Name="overlay" Visibility="{Binding OverlayVisibility}" Margin="0" Grid.RowSpan="3"
+              Background="#7F000000" Grid.ColumnSpan="2">
             <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Grid.Background>
-                    <SolidColorBrush Color="{StaticResource BlueColor}"></SolidColorBrush>
+                    <SolidColorBrush Color="{StaticResource BlueColor}" />
                 </Grid.Background>
                 <ItemsControl ItemsSource="{Binding OverlayedControl}">
                     <ItemsControl.ItemTemplateSelector>
-                        <c:OverlayTemplateSelector 
-                            UnlockOverlayTemplate="{StaticResource UnlockOverlay}" 
+                        <c:OverlayTemplateSelector
+                            UnlockOverlayTemplate="{StaticResource UnlockOverlay}"
                             LoginOverlayTemplate="{StaticResource LoginOverlay}"
                             SettingsOverlayTemplate="{StaticResource SettingsOverlay}"
                             LoggerOverlayTemplate="{StaticResource LoggerOverlay}"
-                            SearchOverlayTemplate="{StaticResource SearchOverlay}"/>
+                            SearchOverlayTemplate="{StaticResource SearchOverlay}" />
                     </ItemsControl.ItemTemplateSelector>
                 </ItemsControl>
             </Grid>

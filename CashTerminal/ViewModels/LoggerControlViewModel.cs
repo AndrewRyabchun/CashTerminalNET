@@ -3,7 +3,7 @@ using CashTerminal.Commons;
 
 namespace CashTerminal.ViewModels
 {
-    class LoggerControlViewModel:ViewModelBase
+    internal class LoggerControlViewModel : ViewModelBase
     {
         public ICommand CloseCommand { get; set; }
         public ICommand ExportCommand { get; set; }
@@ -16,8 +16,8 @@ namespace CashTerminal.ViewModels
         public LoggerControlViewModel(IOverlayable parent)
         {
             _parent = parent;
-            CloseCommand=new RelayCommand(Close);
-            ExportCommand=new RelayCommand(Export);
+            CloseCommand = new RelayCommand(Close);
+            ExportCommand = new RelayCommand(Export);
         }
 
         private void Close(object obj)
@@ -27,7 +27,6 @@ namespace CashTerminal.ViewModels
 
         private void Export(object obj)
         {
-            
         }
 
         public override string ToString()

@@ -26,12 +26,11 @@ namespace CashTerminal.Models
             _timer.Tick += (sender, e) => { OnPropertyChanged("SessionTime"); };
             _timer.Interval = TimeSpan.FromSeconds(0.5);
             _timer.Start();
-
         }
 
         public void Reset()
         {
-            _sessionStartTime=DateTime.Now;
+            _sessionStartTime = DateTime.Now;
             if (!_timer.IsEnabled)
                 _timer.Start();
         }

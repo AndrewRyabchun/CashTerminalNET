@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace CashTerminal.Commons
 {
-    class ViewModelBase : INotifyPropertyChanged
+    internal class ViewModelBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

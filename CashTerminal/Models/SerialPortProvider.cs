@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.IO.Ports;
 
-namespace CashTerminal.Model
+namespace CashTerminal.Models
 {
-    class SerialPortProvider
+    internal class SerialPortProvider
     {
         private SerialPort _sp;
         private static List<string> AllPortsName => new List<string>(SerialPort.GetPortNames());
+
         public string PortName
         {
             get { return _sp.PortName; }
@@ -20,13 +21,11 @@ namespace CashTerminal.Model
         public SerialPortProvider(SerialDataReceivedEventHandler handler)
             : this(AllPortsName[0], 9600, Parity.None, 8, StopBits.One, handler)
         {
-
         }
 
         public SerialPortProvider(string portName, SerialDataReceivedEventHandler handler)
             : this(portName, 9600, Parity.None, 8, StopBits.One, handler)
         {
-
         }
 
         public SerialPortProvider(string portName, int baudRate, Parity parity, int dataBits, StopBits stopBits,

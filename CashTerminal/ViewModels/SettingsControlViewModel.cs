@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 using CashTerminal.Commons;
 using System.IO.Ports;
 using System.Windows.Input;
-using CashTerminal.Models.Data;
+using CashTerminal.Data;
 
 namespace CashTerminal.ViewModels
 {
-    class SettingsControlViewModel:ViewModelBase
+    internal class SettingsControlViewModel : ViewModelBase
     {
         public ObservableCollection<string> SerialPortList { get; set; }
         public string ScannerPort { get; set; }
@@ -21,16 +21,11 @@ namespace CashTerminal.ViewModels
         public ICommand SaveCommand { get; set; }
 
         private int _terminalNumber;
+
         public string TerminalNumber
         {
-            get
-            {
-                return _terminalNumber.ToString();
-            }
-            set
-            {
-                int.TryParse(value, out _terminalNumber);
-            }
+            get { return _terminalNumber.ToString(); }
+            set { int.TryParse(value, out _terminalNumber); }
         }
 
         private IOverlayable _parent;
@@ -38,8 +33,8 @@ namespace CashTerminal.ViewModels
         public SettingsControlViewModel(IOverlayable parent)
         {
             _parent = parent;
-            SaveCommand=new RelayCommand(Save, IsValidTerminalNumber);
-            SerialPortList=new ObservableCollection<string>(_parent.Settings.PortNames);
+            SaveCommand = new RelayCommand(Save, IsValidTerminalNumber);
+            SerialPortList = new ObservableCollection<string>(_parent.Settings.PortNames);
             PrinterPort = _parent.Settings.PrinterPort;
             ScannerPort = _parent.Settings.ScannerPort;
             _terminalNumber = _parent.Settings.TerminalNumber;

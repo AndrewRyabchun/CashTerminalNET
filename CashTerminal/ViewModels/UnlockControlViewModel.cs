@@ -11,16 +11,17 @@ using CashTerminal.Commons;
 
 namespace CashTerminal.ViewModels
 {
-    class UnlockControlViewModel:ViewModelBase
+    internal class UnlockControlViewModel : ViewModelBase
     {
         private IOverlayable _parent;
 
         private string _password;
 
         public ICommand UnlockCommand { get; set; }
+
         public UnlockControlViewModel(IOverlayable parent)
         {
-            UnlockCommand=new RelayCommand(Unlock,IsValid);
+            UnlockCommand = new RelayCommand(Unlock, IsValid);
             _parent = parent;
         }
 
@@ -43,6 +44,7 @@ namespace CashTerminal.ViewModels
         {
             return !string.IsNullOrWhiteSpace(Password);
         }
+
         public override string ToString()
         {
             return "UnlockControl";

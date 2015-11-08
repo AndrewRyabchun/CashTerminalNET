@@ -1,11 +1,11 @@
-﻿using CashTerminal.Data;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using CashTerminal.Data;
 
-namespace CashTerminal.Model
+namespace CashTerminal.Models
 {
-    class DataBaseProvider : IDisposable
+    internal class DataBaseProvider : IDisposable
     {
         private SupermarketDataEntities ent;
         public ObservableCollection<ArticleRecord> Items { get; private set; }
@@ -37,12 +37,11 @@ namespace CashTerminal.Model
             using (ent = new SupermarketDataEntities())
             {
                 var founded = from d in ent.Articles
-                              where d.Name.Contains(name) || d.ID.ToString().Contains(id)
-                              select d;
+                    where d.Name.Contains(name) || d.ID.ToString().Contains(id)
+                    select d;
 
                 return founded.ToArray();
             }
         }
-
     }
 }

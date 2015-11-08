@@ -5,7 +5,7 @@ using System.Windows.Input;
 
 namespace CashTerminal.ViewModels
 {
-    class LoginControlViewModel:ViewModelBase
+    internal class LoginControlViewModel : ViewModelBase
     {
         private string _username;
         private string _password;
@@ -23,7 +23,7 @@ namespace CashTerminal.ViewModels
         }
 
         public string Password
-        { 
+        {
             get { return _password; }
             set
             {

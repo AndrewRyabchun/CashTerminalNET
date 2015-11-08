@@ -12,39 +12,44 @@
         <Grid Margin="10">
             <ContentControl Margin="0">
                 <ContentControl.Foreground>
-                    <SolidColorBrush Color="{StaticResource Gray1}"/>
+                    <SolidColorBrush Color="{StaticResource Gray1}" />
                 </ContentControl.Foreground>
                 <StackPanel Width="250">
-                    <TextBlock HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="Блокировка" VerticalAlignment="Top" FontSize="21.333"/>
-                    <TextBlock TextWrapping="Wrap" Text="Введите пароль повторно:" HorizontalAlignment="Left" Margin="0,29,0,0"/>
+                    <TextBlock HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="Блокировка"
+                               VerticalAlignment="Top" FontSize="21.333" />
+                    <TextBlock TextWrapping="Wrap" Text="Введите пароль повторно:" HorizontalAlignment="Left"
+                               Margin="0,29,0,0" />
                     <PasswordBox Margin="0,10,0,0">
                         <i:Interaction.Behaviors>
-                            <local:PasswordBehavior Password="{Binding Password, Mode=TwoWay}"/>
+                            <local:PasswordBehavior Password="{Binding Password, Mode=TwoWay}" />
                         </i:Interaction.Behaviors>
                     </PasswordBox>
-                    <Button Style="{StaticResource ButtonStyle}" Content="Разблокировать" Margin="0,20,0,0" HorizontalAlignment="Right" Foreground="#FF00628B" Command="{Binding UnlockCommand}"/>
+                    <Button Style="{StaticResource ButtonStyle}" Content="Разблокировать" Margin="0,20,0,0"
+                            HorizontalAlignment="Right" Foreground="#FF00628B" Command="{Binding UnlockCommand}" />
                 </StackPanel>
             </ContentControl>
         </Grid>
     </DataTemplate>
-    
+
     <DataTemplate x:Key="LoginOverlay">
         <Grid Margin="10">
             <ContentControl Margin="0">
                 <ContentControl.Foreground>
-                    <SolidColorBrush Color="{StaticResource Gray1}"/>
+                    <SolidColorBrush Color="{StaticResource Gray1}" />
                 </ContentControl.Foreground>
                 <StackPanel Width="250">
-                    <TextBlock HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="Вход" VerticalAlignment="Top" FontSize="21.333"/>
-                    <TextBlock TextWrapping="Wrap" Text="Имя пользователя" HorizontalAlignment="Left" Margin="0,29,0,0"/>
-                    <TextBox Text="{Binding Username}"/>
-                    <TextBlock TextWrapping="Wrap" Text="Пароль" HorizontalAlignment="Left" Margin="0,0,0,0"/>
+                    <TextBlock HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="Вход"
+                               VerticalAlignment="Top" FontSize="21.333" />
+                    <TextBlock TextWrapping="Wrap" Text="Имя пользователя" HorizontalAlignment="Left" Margin="0,29,0,0" />
+                    <TextBox Text="{Binding Username}" />
+                    <TextBlock TextWrapping="Wrap" Text="Пароль" HorizontalAlignment="Left" Margin="0,0,0,0" />
                     <PasswordBox>
                         <i:Interaction.Behaviors>
-                            <local:PasswordBehavior Password="{Binding Password, Mode=TwoWay}"/>
+                            <local:PasswordBehavior Password="{Binding Password, Mode=TwoWay}" />
                         </i:Interaction.Behaviors>
                     </PasswordBox>
-                    <Button Style="{StaticResource ButtonStyle}" Content="Войти" Command="{Binding InnerLoginCommand}" Margin="0,20,0,0" HorizontalAlignment="Right" Foreground="#FF00628B"/>
+                    <Button Style="{StaticResource ButtonStyle}" Content="Войти" Command="{Binding InnerLoginCommand}"
+                            Margin="0,20,0,0" HorizontalAlignment="Right" Foreground="#FF00628B" />
                 </StackPanel>
             </ContentControl>
         </Grid>
@@ -54,83 +59,102 @@
         <Grid Margin="10">
             <ContentControl Margin="0">
                 <ContentControl.Foreground>
-                    <SolidColorBrush Color="{StaticResource Gray1}"/>
+                    <SolidColorBrush Color="{StaticResource Gray1}" />
                 </ContentControl.Foreground>
                 <StackPanel>
-                    <TextBlock HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="Настройки" VerticalAlignment="Top" FontSize="21.333"/>
+                    <TextBlock HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="Настройки"
+                               VerticalAlignment="Top" FontSize="21.333" />
                     <Grid Margin="0,20,0,0">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="40"/>
-                            <RowDefinition Height="40"/>
-                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40" />
+                            <RowDefinition Height="40" />
+                            <RowDefinition Height="40" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="80" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock TextWrapping="Wrap" Text="Последовательный порт для сканера" VerticalAlignment="Center" Margin="0,7"/>
-                        <ComboBox Background="White" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="0,4" ItemsSource="{Binding SerialPortList}" SelectedItem="{Binding ScannerPort}"/>
+                        <TextBlock TextWrapping="Wrap" Text="Последовательный порт для сканера"
+                                   VerticalAlignment="Center" Margin="0,7" />
+                        <ComboBox Background="White" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center"
+                                  Margin="0,4" ItemsSource="{Binding SerialPortList}"
+                                  SelectedItem="{Binding ScannerPort}" />
                         <TextBlock TextWrapping="Wrap" Text="Последовательный порт для принтера" Grid.Row="1"
                                    Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,7" />
-                        <ComboBox Background="White" Grid.Column="1" VerticalAlignment="Center" Grid.Row="1" Margin="0,4" ItemsSource="{Binding SerialPortList}" SelectedItem="{Binding PrinterPort}"/>
-                        <TextBlock TextWrapping="Wrap" Text="Номер кассы" HorizontalAlignment="Left" Margin="0" Grid.Row="2"
-                                   Grid.Column="0" VerticalAlignment="Center"/>
-                        <TextBox Grid.Column="1" Margin="0" Height="30" Grid.Row="2" Text="{Binding TerminalNumber}"/>
+                        <ComboBox Background="White" Grid.Column="1" VerticalAlignment="Center" Grid.Row="1"
+                                  Margin="0,4" ItemsSource="{Binding SerialPortList}"
+                                  SelectedItem="{Binding PrinterPort}" />
+                        <TextBlock TextWrapping="Wrap" Text="Номер кассы" HorizontalAlignment="Left" Margin="0"
+                                   Grid.Row="2"
+                                   Grid.Column="0" VerticalAlignment="Center" />
+                        <TextBox Grid.Column="1" Margin="0" Height="30" Grid.Row="2" Text="{Binding TerminalNumber}" />
                     </Grid>
-                    <Button Style="{StaticResource ButtonStyle}" Content="Сохранить" Margin="0,20,0,0" HorizontalAlignment="Right" Foreground="#FF00628B" Command="{Binding SaveCommand}"/>
+                    <Button Style="{StaticResource ButtonStyle}" Content="Сохранить" Margin="0,20,0,0"
+                            HorizontalAlignment="Right" Foreground="#FF00628B" Command="{Binding SaveCommand}" />
                 </StackPanel>
             </ContentControl>
         </Grid>
     </DataTemplate>
-    
+
     <DataTemplate x:Key="LoggerOverlay">
         <Grid Margin="10">
             <ContentControl Margin="0">
                 <ContentControl.Foreground>
-                    <SolidColorBrush Color="{StaticResource Gray1}"/>
+                    <SolidColorBrush Color="{StaticResource Gray1}" />
                 </ContentControl.Foreground>
-                <StackPanel Width="500" Height="500" >
-                    <TextBlock HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="Журнал событий" VerticalAlignment="Top" FontSize="21.333"/>
+                <StackPanel Width="500" Height="500">
+                    <TextBlock HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="Журнал событий"
+                               VerticalAlignment="Top" FontSize="21.333" />
                     <ScrollViewer Height="380" VerticalScrollBarVisibility="Auto" Margin="10,20,10,10">
-                        <TextBox FontSize="10" Text="{Binding LogText, Mode=OneWay}"/>
+                        <TextBox FontSize="10" Text="{Binding LogText, Mode=OneWay}" />
                     </ScrollViewer>
                     <DockPanel LastChildFill="False">
-                        <Button Style="{StaticResource ButtonStyle}" Content="Выйти" Margin="0,20,0,0" HorizontalAlignment="Right" Foreground="#FF00628B" DockPanel.Dock="Right" Command="{Binding CloseCommand}"/>
-                        <Button Style="{StaticResource ButtonStyle}" Content="Экспорт" Margin="0,20,20,0" HorizontalAlignment="Right" Foreground="#FF00628B" DockPanel.Dock="Right" Command="{Binding ExportCommand}"/>
+                        <Button Style="{StaticResource ButtonStyle}" Content="Выйти" Margin="0,20,0,0"
+                                HorizontalAlignment="Right" Foreground="#FF00628B" DockPanel.Dock="Right"
+                                Command="{Binding CloseCommand}" />
+                        <Button Style="{StaticResource ButtonStyle}" Content="Экспорт" Margin="0,20,20,0"
+                                HorizontalAlignment="Right" Foreground="#FF00628B" DockPanel.Dock="Right"
+                                Command="{Binding ExportCommand}" />
                     </DockPanel>
                 </StackPanel>
             </ContentControl>
         </Grid>
     </DataTemplate>
-    
+
     <DataTemplate x:Key="SearchOverlay">
         <Grid Margin="10">
             <ContentControl Margin="0">
                 <ContentControl.Foreground>
-                    <SolidColorBrush Color="{StaticResource Gray1}"/>
+                    <SolidColorBrush Color="{StaticResource Gray1}" />
                 </ContentControl.Foreground>
                 <StackPanel Width="600" Height="410">
-                    <TextBlock HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="Поиск" VerticalAlignment="Top" FontSize="21.333"/>
-                    <TextBlock TextWrapping="Wrap" Text="Поиск по коду или названию:" Margin="0,20,0,0"/>
+                    <TextBlock HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="Поиск"
+                               VerticalAlignment="Top" FontSize="21.333" />
+                    <TextBlock TextWrapping="Wrap" Text="Поиск по коду или названию:" Margin="0,20,0,0" />
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="100" />
                         </Grid.ColumnDefinitions>
-                        <TextBox TextWrapping="Wrap" BorderBrush="White" Margin="0,0,10,0"/>
-                        <Button Style="{StaticResource ButtonStyle}" Content="Искать" Margin="0" Foreground="#FF00628B" Command="{Binding SearchCommand}" Grid.Column="1"/>
+                        <TextBox TextWrapping="Wrap" BorderBrush="White" Margin="0,0,10,0" />
+                        <Button Style="{StaticResource ButtonStyle}" Content="Искать" Margin="0" Foreground="#FF00628B"
+                                Command="{Binding SearchCommand}" Grid.Column="1" />
                     </Grid>
-                    <TextBlock TextWrapping="Wrap" Text="Результаты:" Margin="0,20,0,0"/>
+                    <TextBlock TextWrapping="Wrap" Text="Результаты:" Margin="0,20,0,0" />
                     <DataGrid Height="200" ItemsSource="{Binding SearchResults}" AutoGenerateColumns="False">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Width="1*" Header="Код" Binding="{Binding ID}"/>
-                            <DataGridTextColumn Width="5*" Header="Название" Binding="{Binding Name}"/>
-                            <DataGridTextColumn Width="1*" Header="Цена" Binding="{Binding Price}"/>
+                            <DataGridTextColumn Width="1*" Header="Код" Binding="{Binding ID}" />
+                            <DataGridTextColumn Width="5*" Header="Название" Binding="{Binding Name}" />
+                            <DataGridTextColumn Width="1*" Header="Цена" Binding="{Binding Price}" />
                         </DataGrid.Columns>
                     </DataGrid>
                     <DockPanel LastChildFill="False">
-                        <Button Style="{StaticResource ButtonStyle}" Content="Выйти" Margin="0,30,0,0" HorizontalAlignment="Right" Foreground="#FF00628B" DockPanel.Dock="Right" Command="{Binding CloseCommand}"/>
-                        <Button Style="{StaticResource ButtonStyle}" Content="Добавить" Margin="0,30,20,0" HorizontalAlignment="Right" Foreground="#FF00628B" DockPanel.Dock="Right" Command="{Binding AddCommand}"/>
+                        <Button Style="{StaticResource ButtonStyle}" Content="Выйти" Margin="0,30,0,0"
+                                HorizontalAlignment="Right" Foreground="#FF00628B" DockPanel.Dock="Right"
+                                Command="{Binding CloseCommand}" />
+                        <Button Style="{StaticResource ButtonStyle}" Content="Добавить" Margin="0,30,20,0"
+                                HorizontalAlignment="Right" Foreground="#FF00628B" DockPanel.Dock="Right"
+                                Command="{Binding AddCommand}" />
                     </DockPanel>
                 </StackPanel>
             </ContentControl>

@@ -6,33 +6,33 @@
     <Color x:Key="Gray2">#DDDDD0</Color>
 
     <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
-        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-        <Setter Property="Background" Value="White"/>
-        <Setter Property="BorderBrush" Value="White"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Foreground" Value="#333333"/>
-        <Setter Property="HorizontalContentAlignment" Value="Center"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="Padding" Value="16,3,16,3"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Background" Value="White" />
+        <Setter Property="BorderBrush" Value="White" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Foreground" Value="#333333" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="16,3,16,3" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border Name="Chrome"
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                SnapsToDevicePixels="true">
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            SnapsToDevicePixels="true">
                         <ContentPresenter Name="Presenter" Margin="{TemplateBinding Padding}"
-                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                    RecognizesAccessKey="True"
-                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          RecognizesAccessKey="True"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Foreground" Value="#333333" />
                             <Setter Property="Background" Value="#dddddd" />
-                            <Setter Property="BorderBrush" Value="Red"/>
+                            <Setter Property="BorderBrush" Value="Red" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Background" Value="#dddddd" />
@@ -41,8 +41,8 @@
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter Property="Background" Value="#1ba1e2" />
-                            <Setter Property="BorderBrush" Value="#1ba1e2"/>
-                            <Setter Property="Foreground" Value="#ffffff"/>
+                            <Setter Property="BorderBrush" Value="#1ba1e2" />
+                            <Setter Property="Foreground" Value="#ffffff" />
                         </Trigger>
                         <Trigger Property="IsFocused" Value="true">
                             <Setter TargetName="Chrome" Property="BorderBrush" Value="#00628B" />
@@ -54,27 +54,27 @@
     </Style>
 
     <Style x:Key="ReversedButtonStyle" TargetType="{x:Type Button}">
-        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-        <Setter Property="Background" Value="#00628B"/>
-        <Setter Property="BorderBrush" Value="#00628B"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Foreground" Value="#E6E6DC"/>
-        <Setter Property="HorizontalContentAlignment" Value="Center"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="Padding" Value="16,3,16,3"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Background" Value="#00628B" />
+        <Setter Property="BorderBrush" Value="#00628B" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Foreground" Value="#E6E6DC" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="16,3,16,3" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border Name="Chrome"
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                SnapsToDevicePixels="true">
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            SnapsToDevicePixels="true">
                         <ContentPresenter Name="Presenter" Margin="{TemplateBinding Padding}"
-                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                    RecognizesAccessKey="True"
-                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          RecognizesAccessKey="True"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="false">
@@ -87,8 +87,8 @@
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter Property="Background" Value="#1ba1e2" />
-                            <Setter Property="BorderBrush" Value="#1ba1e2"/>
-                            <Setter Property="Foreground" Value="#ffffff"/>
+                            <Setter Property="BorderBrush" Value="#1ba1e2" />
+                            <Setter Property="Foreground" Value="#ffffff" />
                         </Trigger>
                         <Trigger Property="IsFocused" Value="true">
                             <Setter TargetName="Chrome" Property="BorderBrush" Value="#00628B" />

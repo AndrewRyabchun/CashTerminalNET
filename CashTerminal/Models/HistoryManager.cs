@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CashTerminal.Model
+namespace CashTerminal.Models
 {
-    class HistoryManager
+    internal class HistoryManager
     {
         public List<string> History { get; private set; }
 
