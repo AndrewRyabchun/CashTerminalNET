@@ -2,6 +2,7 @@
 using System.Security;
 using System.Windows;
 using System.Windows.Input;
+using CashTerminal.Models;
 
 namespace CashTerminal.ViewModels
 {
@@ -32,6 +33,8 @@ namespace CashTerminal.ViewModels
             }
         }
 
+        public bool Validation => new Authorization(_username, _password).validated;
+
         public ICommand InnerLoginCommand { get; set; }
 
         public LoginControlViewModel(IOverlayable parent)
@@ -43,7 +46,6 @@ namespace CashTerminal.ViewModels
 
         private void Login(object obj)
         {
-            //Authorize(_username,_password)
             _parent.Timer.Reset();
             _parent.CloseOverlay();
         }

@@ -100,6 +100,7 @@
     <Compile Include="Commons\PasswordBehavior.cs" />
     <Compile Include="Commons\RelayCommand.cs" />
     <Compile Include="Commons\ViewModelBase.cs" />
+    <Compile Include="Models\Authorization.cs" />
     <Compile Include="Models\SessionTimer.cs" />
     <Compile Include="Models\SettingsManager.cs" />
     <Compile Include="ViewModels\LoggerControlViewModel.cs" />

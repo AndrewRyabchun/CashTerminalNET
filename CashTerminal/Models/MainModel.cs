@@ -10,11 +10,17 @@ namespace CashTerminal.Models
         private DataBaseProvider _db;
         private IPrintable _printer;
 
-        public MainModel()
+        public MainModel(IPrintable printer)
         {
             _history = new HistoryManager();
             _port = new SerialPortProvider(DataReceived);
             _db = new DataBaseProvider();
+            _printer = printer;
+        }
+
+        public void ChangeOutputType(IPrintable printer)
+        {
+            _printer = printer;
         }
 
         private void DataReceived(object sender, SerialDataReceivedEventArgs e)

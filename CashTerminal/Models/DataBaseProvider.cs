@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using CashTerminal.Data;
+using System.Collections.Generic;
 
 namespace CashTerminal.Models
 {
@@ -12,11 +13,15 @@ namespace CashTerminal.Models
 
         public void AddArticle(Article art)
         {
-            var searchItem = Items.First(item => item.ID == art.ID);
-
-            if (searchItem != null) searchItem.Add(art);
-
-            else Items.Add(new ArticleRecord(art));
+            try
+            {
+                var searchItem = Items.First(item => item.ID == art.ID);
+                searchItem.Add(art);
+            }
+            catch (InvalidOperationException)
+            {
+                Items.Add(new ArticleRecord(art));
+            }
         }
 
         public void Dispose()
@@ -32,15 +37,39 @@ namespace CashTerminal.Models
             }
         }
 
-        public Article[] Search(string name, string id = "")
+        public Article[] Search(string name)
         {
             using (ent = new SupermarketDataEntities())
             {
-                var founded = from d in ent.Articles
-                    where d.Name.Contains(name) || d.ID.ToString().Contains(id)
-                    select d;
 
-                return founded.ToArray();
+                List<Article> result = new List<Article>();
+
+                long parsedID;
+
+                bool idNeeded = long.TryParse(name, out parsedID);
+
+                IQueryable<Article> founded;
+
+                if (idNeeded)
+                {
+                    string id = parsedID.ToString();
+
+                    founded = from d in ent.Articles
+                                  where d.ID.ToString().Contains(id)
+                                  select d;
+
+                    result.AddRange(founded);
+                }
+
+                string[] words = name.Split(' ');
+
+                founded = from d in ent.Articles
+                          where words.All(d.Name.Contains)
+                          select d;
+
+                result.AddRange(founded);
+
+                return result.ToArray();
             }
         }
     }

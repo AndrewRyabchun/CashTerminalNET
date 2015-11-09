@@ -3,7 +3,7 @@ using CashTerminal.Data;
 
 namespace CashTerminal.Models
 {
-    internal class ArticleRecord : Article
+    internal struct ArticleRecord
     {
         public ArticleRecord(Article sample)
         {
@@ -16,6 +16,9 @@ namespace CashTerminal.Models
 
         public int Count { get; private set; }
         public decimal FullPrice { get; private set; }
+        public long ID { get; private set; }
+        public string Name { get; private set; }
+        public decimal Price { get; private set; }
 
         public void Add(Article art)
         {
