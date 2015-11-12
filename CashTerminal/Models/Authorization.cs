@@ -8,12 +8,14 @@ namespace CashTerminal.Models
 {
     class Authorization
     {
-        public readonly bool validated;
+        private readonly bool validated;
 
         public Authorization(string username, string password)
         {
             validated = Authorize(username, password);
         }
+
+        public bool IsValid() => validated;
 
         private bool Authorize(string username, string password)
         {

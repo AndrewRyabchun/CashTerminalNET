@@ -33,8 +33,6 @@ namespace CashTerminal.ViewModels
             }
         }
 
-        public bool Validation => new Authorization(_username, _password).validated;
-
         public ICommand InnerLoginCommand { get; set; }
 
         public LoginControlViewModel(IOverlayable parent)

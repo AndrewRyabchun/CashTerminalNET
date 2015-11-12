@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using CashTerminal.Data;
 using System.Collections.Generic;
+using System.Data.Entity;
 
 namespace CashTerminal.Models
 {
@@ -37,11 +38,10 @@ namespace CashTerminal.Models
             }
         }
 
-        public Article[] Search(string name)
+        public async void SearchAsync(string name, ObservableCollection<Article> searchResults)
         {
             using (ent = new SupermarketDataEntities())
             {
-
                 List<Article> result = new List<Article>();
 
                 long parsedID;
@@ -55,21 +55,21 @@ namespace CashTerminal.Models
                     string id = parsedID.ToString();
 
                     founded = from d in ent.Articles
-                                  where d.ID.ToString().Contains(id)
-                                  select d;
+                              where d.ID.ToString().Contains(id)
+                              select d;
 
-                    result.AddRange(founded);
+                    result.AddRange(await founded.ToListAsync());
                 }
 
                 string[] words = name.Split(' ');
 
                 founded = from d in ent.Articles
-                          where words.All(d.Name.Contains)
+                          where words.All(item => d.Name.Contains(item))
                           select d;
 
-                result.AddRange(founded);
+                result.AddRange(await founded.ToListAsync());
 
-                return result.ToArray();
+                searchResults = new ObservableCollection<Article>(result);
             }
         }
     }
