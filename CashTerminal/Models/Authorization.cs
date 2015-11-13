@@ -24,8 +24,8 @@ namespace CashTerminal.Models
                 var wanted = from d in ent.Users
                              where d.Username == username && d.PasswordHash == SHA1HashStringForUTF8String(password)
                              select d;
-
-                return wanted != null;
+                var res = wanted.ToList();
+                return res.Count!=0;
             }
         }
 

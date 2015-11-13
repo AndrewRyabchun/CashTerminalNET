@@ -2,7 +2,7 @@
 
 namespace CashTerminal.Commons
 {
-    public interface IOverlayable
+    internal interface IOverlayable
     {
         void CloseOverlay();
 
@@ -11,5 +11,7 @@ namespace CashTerminal.Commons
         SettingsManager Settings { get; }
 
         string LogText { get; }
+
+        MainModel Model { get; }
     }
 }

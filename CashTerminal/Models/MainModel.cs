@@ -9,7 +9,16 @@ namespace CashTerminal.Models
         private SerialPortProvider _port;
         private DataBaseProvider _db;
         private IPrintable _printer;
-        public Authorization Validator { get; private set; }
+        public Authorization Validator { get; set; }
+
+        public MainModel(string portName = "")
+        {
+            _history = new HistoryManager();
+            _db = new DataBaseProvider();
+
+            _port = (portName == "") ?
+                new SerialPortProvider(DataReceived) : new SerialPortProvider(portName, DataReceived);
+        }
 
         public MainModel(IPrintable printer, string username, string password, string portName = "")
         {
@@ -23,10 +32,11 @@ namespace CashTerminal.Models
             Validator = new Authorization(username, password);
         }
 
-        public void ChangeOutputType(IPrintable printer)
+        public void SetPrinter(IPrintable printer)
         {
             _printer = printer;
         }
+
 
         private void DataReceived(object sender, SerialDataReceivedEventArgs e)
         {

@@ -21,6 +21,8 @@ namespace CashTerminal.ViewModels
     {
         public string UserName => "Пользователь: " + Environment.UserName;
         public string Uptime => "Время сеанса: " + Timer.SessionTime.ToString(@"hh\:mm\:ss");
+        private MainModel _model;
+        public MainModel Model => _model;
 
         public ObservableCollection<ViewModelBase> OverlayedControl { get; }
 
@@ -52,6 +54,9 @@ namespace CashTerminal.ViewModels
             Timer.PropertyChanged += (sender, args) => { OnPropertyChanged("Uptime"); };
 
             Settings = new SettingsManager();
+
+            _model = new MainModel();
+
 
             //init commands
             LogoffCommand = new RelayCommand(Logoff);

@@ -5,7 +5,7 @@ namespace CashTerminal.Models
 {
     internal class HistoryManager
     {
-        public List<string> History { get; private set; }
+        public List<string> History { get; private set; } = new List<string>();
 
         public HistoryManager()
         {
