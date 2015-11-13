@@ -4,10 +4,11 @@ using System.Linq;
 using CashTerminal.Data;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Threading.Tasks;
 
 namespace CashTerminal.Models
 {
-    internal class DataBaseProvider : IDisposable
+    internal class DataBaseProvider
     {
         private SupermarketDataEntities ent;
         public ObservableCollection<ArticleRecord> Items { get; private set; }
@@ -17,7 +18,7 @@ namespace CashTerminal.Models
             try
             {
                 var searchItem = Items.First(item => item.ID == art.ID);
-                searchItem.Add(art);
+                searchItem.Add();
             }
             catch (InvalidOperationException)
             {
@@ -25,9 +26,9 @@ namespace CashTerminal.Models
             }
         }
 
-        public void Dispose()
+        public DataBaseProvider()
         {
-            ent.Dispose();
+            Items=new ObservableCollection<ArticleRecord>();
         }
 
         public Article GetArticle(long id)
@@ -38,7 +39,7 @@ namespace CashTerminal.Models
             }
         }
 
-        public async void SearchAsync(string name, ObservableCollection<Article> searchResults)
+        public async Task<ObservableCollection<Article>> SearchAsync(string name)
         {
             using (ent = new SupermarketDataEntities())
             {
@@ -69,7 +70,7 @@ namespace CashTerminal.Models
 
                 result.AddRange(await founded.ToListAsync());
 
-                searchResults = new ObservableCollection<Article>(result);
+                return new ObservableCollection<Article>(result);
             }
         }
     }

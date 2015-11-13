@@ -1,20 +1,22 @@
-﻿using System.IO.Ports;
+﻿using System.ComponentModel;
+using System.IO.Ports;
+using System.Runtime.CompilerServices;
 using CashTerminal.Data;
 
 namespace CashTerminal.Models
 {
     internal class MainModel
     {
-        private HistoryManager _history;
         private SerialPortProvider _port;
-        private DataBaseProvider _db;
         private IPrintable _printer;
         public Authorization Validator { get; set; }
+        public DataBaseProvider DataBase { get; }
+        public HistoryManager History { get; set; }
 
         public MainModel(string portName = "")
         {
-            _history = new HistoryManager();
-            _db = new DataBaseProvider();
+            History = new HistoryManager();
+            DataBase = new DataBaseProvider();
 
             _port = (portName == "") ?
                 new SerialPortProvider(DataReceived) : new SerialPortProvider(portName, DataReceived);
@@ -22,12 +24,12 @@ namespace CashTerminal.Models
 
         public MainModel(IPrintable printer, string username, string password, string portName = "")
         {
-            _history = new HistoryManager();
+            History = new HistoryManager();
 
             _port = (portName == "") ?
                 new SerialPortProvider(DataReceived) : new SerialPortProvider(portName, DataReceived);
 
-            _db = new DataBaseProvider();
+            DataBase = new DataBaseProvider();
             _printer = printer;
             Validator = new Authorization(username, password);
         }
@@ -40,11 +42,12 @@ namespace CashTerminal.Models
 
         private void DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            Article art = _db.GetArticle(long.Parse(((SerialPort)sender).ReadExisting()));
+            Article art = DataBase.GetArticle(long.Parse(((SerialPort)sender).ReadExisting()));
 
-            _db.AddArticle(art);
+            DataBase.AddArticle(art);
 
-            _history.Log($"Добавлен товар: {art.Name}");
+            History.Log($"Добавлен товар: {art.Name}");
         }
+
     }
 }

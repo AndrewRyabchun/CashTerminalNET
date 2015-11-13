@@ -8,13 +8,14 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using CashTerminal.Commons;
+using CashTerminal.Models;
 
 namespace CashTerminal.ViewModels
 {
     internal class UnlockControlViewModel : ViewModelBase
     {
         private IOverlayable _parent;
-
+        private string _username;
         private string _password;
 
         public ICommand UnlockCommand { get; set; }
@@ -23,6 +24,7 @@ namespace CashTerminal.ViewModels
         {
             UnlockCommand = new RelayCommand(Unlock, IsValid);
             _parent = parent;
+            _username=_parent.Model.Validator.Username;
         }
 
         public string Password
@@ -37,6 +39,12 @@ namespace CashTerminal.ViewModels
 
         public void Unlock(object obj)
         {
+            _parent.Model.Validator=new Authorization(_username,_password);
+            if (!_parent.Model.Validator.IsValid)
+            {
+                MessageBox.Show("Неверный пароль", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             _parent.CloseOverlay();
         }
 

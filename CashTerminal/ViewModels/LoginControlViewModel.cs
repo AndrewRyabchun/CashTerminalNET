@@ -1,5 +1,4 @@
 ﻿using CashTerminal.Commons;
-using System.Security;
 using System.Windows;
 using System.Windows.Input;
 using CashTerminal.Models;
@@ -45,7 +44,7 @@ namespace CashTerminal.ViewModels
         private void Login(object obj)
         {
             _parent.Model.Validator = new Authorization(Username, Password);
-            if (_parent.Model.Validator.IsValid())
+            if (!_parent.Model.Validator.IsValid)
             {
                 MessageBox.Show("Неверные данные", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;

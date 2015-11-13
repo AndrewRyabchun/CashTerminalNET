@@ -10,8 +10,6 @@ namespace CashTerminal.Commons
 
         SettingsManager Settings { get; }
 
-        string LogText { get; }
-
         MainModel Model { get; }
     }
 }

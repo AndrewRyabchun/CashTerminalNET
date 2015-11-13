@@ -20,12 +20,12 @@ namespace CashTerminal.ViewModels
 
         public ICommand SaveCommand { get; set; }
 
-        private int _terminalNumber;
+        private string _terminalNumber;
 
         public string TerminalNumber
         {
-            get { return _terminalNumber.ToString(); }
-            set { int.TryParse(value, out _terminalNumber); }
+            get { return _terminalNumber; }
+            set { _terminalNumber = value; }
         }
 
         private IOverlayable _parent;
@@ -37,21 +37,21 @@ namespace CashTerminal.ViewModels
             SerialPortList = new ObservableCollection<string>(_parent.Settings.PortNames);
             PrinterPort = _parent.Settings.PrinterPort;
             ScannerPort = _parent.Settings.ScannerPort;
-            _terminalNumber = _parent.Settings.TerminalNumber;
+            _terminalNumber = _parent.Settings.TerminalNumber.ToString();
         }
 
         private void Save(object obj)
         {
             _parent.Settings.PrinterPort = PrinterPort;
             _parent.Settings.ScannerPort = ScannerPort;
-            _parent.Settings.TerminalNumber = _terminalNumber;
+            _parent.Settings.TerminalNumber = Convert.ToInt32(_terminalNumber);
             _parent.CloseOverlay();
         }
 
         private bool IsValidTerminalNumber(object obj)
         {
             int _;
-            return int.TryParse(TerminalNumber, out _);
+            return int.TryParse(_terminalNumber, out _);
         }
 
         public override string ToString()

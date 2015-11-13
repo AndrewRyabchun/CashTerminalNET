@@ -14,6 +14,7 @@ namespace CashTerminal.ViewModels
     {
         public string SearchPattern { get; set; }
         public ObservableCollection<Article> SearchResults { get; set; }
+        public Article SelectedResult { get; set; }
 
         public ICommand AddCommand { get; set; }
         public ICommand SearchCommand { get; set; }
@@ -36,8 +37,10 @@ namespace CashTerminal.ViewModels
         {
         }
 
-        private void Search(object obj)
+        private async void Search(object obj)
         {
+            SearchResults = await _parent.Model.DataBase.SearchAsync(SearchPattern);
+            OnPropertyChanged("SearchResults");
         }
 
         private void Close(object obj)
