@@ -14,16 +14,24 @@ namespace CashTerminal.Models
             FullPrice = sample.Price;
         }
 
-        public int Count { get; private set; }
+        private int _count;
+        public int Count
+        {
+            get
+            {
+                return _count;
+            }
+            set
+            {
+                if (value<0)
+                    return;
+                _count = value;
+                FullPrice = Price*value;
+            }
+        }
         public decimal FullPrice { get; private set; }
         public long ID { get; private set; }
         public string Name { get; private set; }
         public decimal Price { get; private set; }
-
-        public void Add()
-        {
-            Count += 1;
-            FullPrice += Price;
-        }
     }
 }

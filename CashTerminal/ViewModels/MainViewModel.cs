@@ -19,7 +19,7 @@ namespace CashTerminal.ViewModels
 {
     internal class MainViewModel : ViewModelBase, IOverlayable
     {
-        public string UserName => "Пользователь: " + Model.Validator.Username;
+        public string UserName => "Пользователь: " + Model.Validator?.Username;
         public string Uptime => "Время сеанса: " + Timer.SessionTime.ToString(@"hh\:mm\:ss");
         public ObservableCollection<ArticleRecord> ArticleRecords => Model.DataBase.Items;
         public ArticleRecord SelectedRecord { get; set; } 
@@ -151,12 +151,14 @@ namespace CashTerminal.ViewModels
         {
             var index = ArticleRecords.IndexOf(SelectedRecord);
             if (index<0) return;
-            ArticleRecords[index].Add();
+            ArticleRecords[index].Count++; 
+            OnPropertyChanged("ArticleRecords");
         }
 
         private void Delete(object obj)
         {
             ArticleRecords.Remove(SelectedRecord);
+            OnPropertyChanged("ArticleRecords");
         }
 
         private void MoveUp(object obj)

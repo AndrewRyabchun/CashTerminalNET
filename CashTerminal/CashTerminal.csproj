@@ -149,11 +149,11 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <None Include="ClassDiagram.cd" />
     <EntityDeploy Include="Data\DataBaseModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DataBaseModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Data\DataBaseModel.edmx.diagram">
       <DependentUpon>DataBaseModel.edmx</DependentUpon>
     </None>

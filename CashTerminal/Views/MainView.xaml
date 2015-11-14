@@ -221,7 +221,8 @@
                       CanUserResizeColumns="False"
                       CanUserResizeRows="False"
                       FontSize="13.333"
-                      ItemsSource="{Binding ArticleRecords}">
+                      ItemsSource="{Binding ArticleRecords}"
+                      SelectedItem="{Binding SelectedRecord}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Width="0.5*"
                                         CanUserSort="False"
@@ -332,7 +333,8 @@
                     HorizontalContentAlignment="Stretch"
                     VerticalContentAlignment="Stretch"
                     FontSize="24"
-                    Style="{StaticResource ButtonStyle}">
+                    Style="{StaticResource ButtonStyle}"
+                    Command="{Binding DeleteCommand}">
                 <Grid Margin="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
@@ -360,7 +362,8 @@
                     HorizontalContentAlignment="Stretch"
                     VerticalContentAlignment="Stretch"
                     FontSize="24"
-                    Style="{StaticResource ButtonStyle}">
+                    Style="{StaticResource ButtonStyle}"
+                    Command="{Binding MoveUpCommand}">
                 <Grid Margin="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
@@ -384,11 +387,12 @@
 
             </Button>
             <Button Grid.Row="5"
-                    Margin="0,5,0,0"
+                    Margin="0,10,0,25"
                     HorizontalContentAlignment="Stretch"
                     VerticalContentAlignment="Stretch"
                     FontSize="24"
-                    Style="{StaticResource ButtonStyle}">
+                    Style="{StaticResource ButtonStyle}" Grid.RowSpan="2"
+                    Command="{Binding MoveDownCommand}">
                 <Grid Margin="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />

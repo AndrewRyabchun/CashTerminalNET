@@ -18,7 +18,7 @@ namespace CashTerminal.Models
             try
             {
                 var searchItem = Items.First(item => item.ID == art.ID);
-                searchItem.Add();
+                searchItem.Count++;
             }
             catch (InvalidOperationException)
             {
@@ -35,7 +35,7 @@ namespace CashTerminal.Models
         {
             using (ent = new SupermarketDataEntities())
             {
-                return ent.Articles.First(item => item.ID == id);
+                return ent.Articles.FirstOrDefault(item => item.ID == id);
             }
         }
 
