@@ -44,18 +44,19 @@ namespace CashTerminal.Models
 
         private void DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            try
-            {
-                Article art = DataBase.GetArticle(long.Parse(((SerialPort)sender).ReadExisting()));
+            long id = -1;
 
-                Application.Current.Dispatcher.Invoke(() => { DataBase.AddArticle(art); });
+            bool isValid = long.TryParse(((SerialPort)sender).ReadExisting(), out id);
 
-                if (art != null)
-                    History.Log($"Добавлен товар: {art.Name}");
-            }
-            catch (OverflowException)
-            { }
+            if (!isValid) return;
+
+            Article art = DataBase.GetArticle(id);
+
+            Application.Current.Dispatcher.Invoke(() => { DataBase.AddArticle(art); });
+
+            if (art != null)
+                History.Log($"Добавлен товар: {art.Name}");
         }
-
     }
+
 }
