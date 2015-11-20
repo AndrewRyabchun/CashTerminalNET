@@ -22,7 +22,7 @@ namespace CashTerminal.ViewModels
         public string UserName => "Пользователь: " + Model.Validator?.Username;
         public string Uptime => "Время сеанса: " + Timer.SessionTime.ToString(@"hh\:mm\:ss");
         public ObservableCollection<ArticleRecord> ArticleRecords => Model.DataBase.Items;
-        public ArticleRecord SelectedRecord { get; set; } 
+        public ArticleRecord SelectedRecord { get; set; }
         public MainModel Model { get; }
         public string ArticleID { get; set; }
 
@@ -71,16 +71,16 @@ namespace CashTerminal.ViewModels
             LoggerCommand = new RelayCommand(ShowLog);
             SearchCommand = new RelayCommand(ShowSearch);
 
-            ManuallyAddCommand=new RelayCommand(ManuallyAdd);
+            ManuallyAddCommand = new RelayCommand(ManuallyAdd);
 
-            CheckoutCommand=new RelayCommand(Checkout);
+            CheckoutCommand = new RelayCommand(Checkout);
             ChangeCountCommand = new RelayCommand(ChangeCount);
-            DeleteCommand=new RelayCommand(Delete);
-            MoveUpCommand=new RelayCommand(MoveUp);
-            MoveDownCommand =new RelayCommand(MoveDown);
+            DeleteCommand = new RelayCommand(Delete);
+            MoveUpCommand = new RelayCommand(MoveUp);
+            MoveDownCommand = new RelayCommand(MoveDown);
 
             //show login overlay
-            OverlayedControl = new ObservableCollection<ViewModelBase> {new LoginControlViewModel(this)};
+            OverlayedControl = new ObservableCollection<ViewModelBase> { new LoginControlViewModel(this) };
         }
 
         #region OverlayCommandHandlers
@@ -128,7 +128,7 @@ namespace CashTerminal.ViewModels
             long id;
             if (!long.TryParse(ArticleID, out id))
                 return;
-            
+
             var article = Model.DataBase.GetArticle(id);
             if (article != null)
             {
@@ -139,19 +139,19 @@ namespace CashTerminal.ViewModels
             {
                 MessageBox.Show("Артикула не существует");
             }
-            
+
         }
 
         private void Checkout(object obj)
         {
-            
+
         }
 
         private void ChangeCount(object obj)
         {
             var index = ArticleRecords.IndexOf(SelectedRecord);
-            if (index<0) return;
-            ArticleRecords[index].Count++; 
+            if (index < 0) return;
+            ArticleRecords[index].Count++;
             OnPropertyChanged("ArticleRecords");
         }
 
@@ -163,12 +163,12 @@ namespace CashTerminal.ViewModels
 
         private void MoveUp(object obj)
         {
-            
+
         }
 
         private void MoveDown(object obj)
         {
-            
+
         }
         #endregion
 

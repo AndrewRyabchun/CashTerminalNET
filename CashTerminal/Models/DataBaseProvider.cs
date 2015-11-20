@@ -15,6 +15,8 @@ namespace CashTerminal.Models
 
         public void AddArticle(Article art)
         {
+            if (art == null) return;
+
             try
             {
                 var searchItem = Items.First(item => item.ID == art.ID);
@@ -22,13 +24,13 @@ namespace CashTerminal.Models
             }
             catch (InvalidOperationException)
             {
-                Items.Add(new ArticleRecord(art));
+                    Items.Add(new ArticleRecord(art));
             }
         }
 
         public DataBaseProvider()
         {
-            Items=new ObservableCollection<ArticleRecord>();
+            Items = new ObservableCollection<ArticleRecord>();
         }
 
         public Article GetArticle(long id)

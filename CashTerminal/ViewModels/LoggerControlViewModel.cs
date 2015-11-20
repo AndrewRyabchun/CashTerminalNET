@@ -40,9 +40,9 @@ namespace CashTerminal.ViewModels
                 using (var file = new StreamWriter(sfd.FileName))
                 {
                     await file.WriteAsync(LogText);
-                    MessageBox.Show("Saved at " +sfd.FileName, "Success", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                    MessageBox.Show("Saved at " + sfd.FileName, "Success", MessageBoxButton.OK, MessageBoxImage.Asterisk);
                 }
-                
+
             }
         }
 

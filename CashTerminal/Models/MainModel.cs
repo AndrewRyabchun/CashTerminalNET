@@ -1,6 +1,8 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.IO.Ports;
 using System.Runtime.CompilerServices;
+using System.Windows;
 using CashTerminal.Data;
 
 namespace CashTerminal.Models
@@ -42,11 +44,17 @@ namespace CashTerminal.Models
 
         private void DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            Article art = DataBase.GetArticle(long.Parse(((SerialPort)sender).ReadExisting()));
+            try
+            {
+                Article art = DataBase.GetArticle(long.Parse(((SerialPort)sender).ReadExisting()));
 
-            DataBase.AddArticle(art);
+                Application.Current.Dispatcher.Invoke(() => { DataBase.AddArticle(art); });
 
-            History.Log($"Добавлен товар: {art.Name}");
+                if (art != null)
+                    History.Log($"Добавлен товар: {art.Name}");
+            }
+            catch (OverflowException)
+            { }
         }
 
     }

@@ -14,7 +14,7 @@ namespace CashTerminal.Models
             set
             {
                 if (AllPortsName.Contains(value))
-                    PortName = value;
+                    _sp.PortName = value;
             }
         }
 
@@ -31,11 +31,17 @@ namespace CashTerminal.Models
         public SerialPortProvider(string portName, int baudRate, Parity parity, int dataBits, StopBits stopBits,
             SerialDataReceivedEventHandler handler)
         {
-            _sp = new SerialPort(portName, baudRate, parity, dataBits, stopBits);
+            _sp = new SerialPort(portName, baudRate, parity, dataBits, stopBits)
+            {
+                RtsEnable = true,
+                DtrEnable = true
+            };
 
             //Prevents from catching NullReferenceException if handler is null or not properly assigned for event
             _sp.DataReceived += delegate { };
             _sp.DataReceived += handler;
+
+            _sp.Open();
         }
     }
 }

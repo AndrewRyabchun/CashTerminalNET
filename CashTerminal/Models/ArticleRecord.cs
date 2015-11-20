@@ -7,6 +7,7 @@ namespace CashTerminal.Models
     {
         public ArticleRecord(Article sample)
         {
+
             ID = sample.ID;
             Name = sample.Name;
             Price = sample.Price;
@@ -23,10 +24,10 @@ namespace CashTerminal.Models
             }
             set
             {
-                if (value<0)
+                if (value < 0)
                     return;
                 _count = value;
-                FullPrice = Price*value;
+                FullPrice = Price * value;
             }
         }
         public decimal FullPrice { get; private set; }
