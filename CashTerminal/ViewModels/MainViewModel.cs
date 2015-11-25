@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Configuration;
@@ -21,10 +22,48 @@ namespace CashTerminal.ViewModels
     {
         public string UserName => "Пользователь: " + Model.Validator?.Username;
         public string Uptime => "Время сеанса: " + Timer.SessionTime.ToString(@"hh\:mm\:ss");
-        public ObservableCollection<ArticleRecord> ArticleRecords => Model.DataBase.Items;
-        public ArticleRecord SelectedRecord { get; set; }
-        public MainModel Model { get; }
+        public ObservableCollection<ArticleRecord> ArticleRecords => new ObservableCollection<ArticleRecord>(Model.Items);
+        private int _selectedIndex;
+
+        public int SelectedIndex
+        {
+            get { return _selectedIndex; }
+            set
+            {
+                _selectedIndex = value;
+                OnPropertyChanged("LastArticleName");
+                OnPropertyChanged("LastArticlePriceData");
+            }
+        }
+
         public string ArticleID { get; set; }
+        public string TotalValue
+        {
+            get
+            {
+                var sum = (from item in Model.Items select item.FullPrice).Sum();
+                return string.Format("{0:F} грн.", sum);
+            }
+        }
+
+        public string LastArticleName
+        {
+            get
+            {
+                return Model.Items.Count != 0 ? Model.Items[SelectedIndex].Name : String.Empty;
+            }
+        }
+
+        public string LastArticlePriceData
+        {
+            get
+            {
+                if (Model.Items.Count == 0)
+                    return String.Empty;
+                var item = Model.Items[SelectedIndex];
+                return $"{item.Price} x {item.Count} = {item.FullPrice}";
+            }
+        }
 
         public ObservableCollection<ViewModelBase> OverlayedControl { get; }
 
@@ -40,8 +79,6 @@ namespace CashTerminal.ViewModels
         public ICommand CheckoutCommand { get; set; }
         public ICommand ChangeCountCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
-        public ICommand MoveUpCommand { get; set; }
-        public ICommand MoveDownCommand { get; set; }
 
         #endregion
 
@@ -52,8 +89,9 @@ namespace CashTerminal.ViewModels
 
         public SessionTimer Timer { get; }
         public SettingsManager Settings { get; }
+        public MainModel Model { get; }
 
-        public string TotalValue => $"{0m:F} грн.";
+
 
         public MainViewModel()
         {
@@ -63,6 +101,10 @@ namespace CashTerminal.ViewModels
             Settings = new SettingsManager();
 
             Model = new MainModel();
+            Model.PropertyChanged += (sender, args) =>
+            {
+                UpdateUI();
+            };
 
             //init commands
             LogoffCommand = new RelayCommand(Logoff);
@@ -76,8 +118,6 @@ namespace CashTerminal.ViewModels
             CheckoutCommand = new RelayCommand(Checkout);
             ChangeCountCommand = new RelayCommand(ChangeCount);
             DeleteCommand = new RelayCommand(Delete);
-            MoveUpCommand = new RelayCommand(MoveUp);
-            MoveDownCommand = new RelayCommand(MoveDown);
 
             //show login overlay
             OverlayedControl = new ObservableCollection<ViewModelBase> { new LoginControlViewModel(this) };
@@ -87,9 +127,12 @@ namespace CashTerminal.ViewModels
 
         public void Logoff(object obj)
         {
+            Model.Items.Clear();
+
             OverlayedControl.Clear();
             OverlayedControl.Add(new LoginControlViewModel(this));
             OnPropertyChanged("OverlayVisibility");
+            UpdateUI();
         }
 
         public void Lock(object obj)
@@ -132,8 +175,8 @@ namespace CashTerminal.ViewModels
             var article = Model.DataBase.GetArticle(id);
             if (article != null)
             {
-                ArticleRecords.Add(new ArticleRecord(article));
-                OnPropertyChanged("ArticleRecords");
+                Model.DataBase.AddArticle(article);
+                UpdateUI();
             }
             else
             {
@@ -149,26 +192,21 @@ namespace CashTerminal.ViewModels
 
         private void ChangeCount(object obj)
         {
-            var index = ArticleRecords.IndexOf(SelectedRecord);
-            if (index < 0) return;
-            ArticleRecords[index].Count++;
-            OnPropertyChanged("ArticleRecords");
+            var index = SelectedIndex;
+            if (index < 0 || Model.Items.Count==0) return;
+
+            var temp = Model.Items[index];
+            Model.Items.RemoveAt(index);
+            temp.Count++;
+            Model.Items.Insert(index,temp);
+            UpdateUI();
         }
 
         private void Delete(object obj)
         {
-            ArticleRecords.Remove(SelectedRecord);
-            OnPropertyChanged("ArticleRecords");
-        }
-
-        private void MoveUp(object obj)
-        {
-
-        }
-
-        private void MoveDown(object obj)
-        {
-
+            if (SelectedIndex>=0 && Model.Items.Count != 0)
+                Model.Items.RemoveAt(SelectedIndex);
+            UpdateUI();
         }
         #endregion
 
@@ -177,6 +215,15 @@ namespace CashTerminal.ViewModels
             OverlayedControl.Clear();
             OnPropertyChanged("OverlayVisibility");
             OnPropertyChanged("UserName");
+
+        }
+
+        public void UpdateUI()
+        {
+            OnPropertyChanged("ArticleRecords");
+            OnPropertyChanged("TotalValue");
+            OnPropertyChanged("LastArticleName");
+            OnPropertyChanged("LastArticlePriceData");
         }
     }
 }

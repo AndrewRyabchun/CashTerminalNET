@@ -174,13 +174,13 @@
             <TextBlock Margin="0,10,0,0"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Top"
-                       Text="TOVAR PLACEHOLDER"
+                       Text="{Binding LastArticleName}"
                        TextWrapping="Wrap" />
             <TextBlock Margin="0,0,10,5"
                        HorizontalAlignment="Right"
                        VerticalAlignment="Bottom"
                        FontWeight="Bold"
-                       Text="count x price = value"
+                       Text="{Binding LastArticlePriceData}"
                        TextWrapping="Wrap" />
             <StackPanel Grid.Row="1"
                         Margin="10,0"
@@ -221,12 +221,9 @@
                       CanUserResizeColumns="False"
                       CanUserResizeRows="False"
                       FontSize="13.333"
-                      ItemsSource="{Binding ArticleRecords}"
-                      SelectedItem="{Binding SelectedRecord}">
+                      SelectedIndex="{Binding SelectedIndex}"
+                      ItemsSource="{Binding ArticleRecords}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Width="0.5*"
-                                        CanUserSort="False"
-                                        Header="№" />
                     <DataGridTextColumn Width="1.5*"
                                         Binding="{Binding ID}"
                                         CanUserSort="False"
@@ -256,22 +253,21 @@
               Margin="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="120" />
-                <RowDefinition Height="68*" />
-                <RowDefinition Height="68*" />
-                <RowDefinition Height="68*" />
-                <RowDefinition Height="68*" />
-                <RowDefinition Height="55*" />
-                <RowDefinition Height="30" />
+                <RowDefinition />
+                <RowDefinition />
+
+                <RowDefinition />
+                <RowDefinition Height="25" />
             </Grid.RowDefinitions>
             <Grid.Background>
                 <SolidColorBrush Color="{StaticResource Gray2}" />
             </Grid.Background>
-            <TextBlock Margin="0"
+            <TextBlock Margin="72,38"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
                        FontSize="32"
                        Text="{Binding TotalValue}"
-                       TextWrapping="Wrap" />
+                       TextWrapping="Wrap" Height="44" Width="124" />
             <Button Grid.Row="1"
                     Margin="0,10,0,5"
                     HorizontalContentAlignment="Stretch"
@@ -280,9 +276,9 @@
                     Style="{StaticResource ButtonStyle}">
                 <Grid Margin="0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition Width="0.5*" />
-                        <ColumnDefinition Width="3.5*" />
+                        <ColumnDefinition Width="5*" />
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="7*" />
                     </Grid.ColumnDefinitions>
                     <ContentControl Margin="0,5"
                                     ClipToBounds="True"
@@ -308,9 +304,9 @@
                     Style="{StaticResource ButtonStyle}">
                 <Grid Margin="0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition Width="0.5*" />
-                        <ColumnDefinition Width="3.5*" />
+                        <ColumnDefinition Width="5*" />
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="7*" />
                     </Grid.ColumnDefinitions>
                     <ContentControl Margin="0,5"
                                     ClipToBounds="True"
@@ -337,9 +333,9 @@
                     Command="{Binding DeleteCommand}">
                 <Grid Margin="0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition Width="0.5*" />
-                        <ColumnDefinition Width="3.5*" />
+                        <ColumnDefinition Width="5*" />
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="7*" />
                     </Grid.ColumnDefinitions>
                     <ContentControl Margin="0,5"
                                     ClipToBounds="True"
@@ -350,64 +346,6 @@
                                HorizontalAlignment="Left"
                                VerticalAlignment="Center"
                                Text="Удалить">
-                        <TextBlock.Foreground>
-                            <SolidColorBrush Color="{StaticResource BlueColor}" />
-                        </TextBlock.Foreground>
-                    </TextBlock>
-                </Grid>
-
-            </Button>
-            <Button Grid.Row="4"
-                    Margin="0,5"
-                    HorizontalContentAlignment="Stretch"
-                    VerticalContentAlignment="Stretch"
-                    FontSize="24"
-                    Style="{StaticResource ButtonStyle}"
-                    Command="{Binding MoveUpCommand}">
-                <Grid Margin="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition Width="0.5*" />
-                        <ColumnDefinition Width="3.5*" />
-                    </Grid.ColumnDefinitions>
-                    <ContentControl Margin="0,5"
-                                    ClipToBounds="True"
-                                    Content="{StaticResource UpArrowIcon}"
-                                    IsEnabled="False" />
-                    <TextBlock Grid.Column="2"
-                               Margin="0"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Center"
-                               Text="Вверх">
-                        <TextBlock.Foreground>
-                            <SolidColorBrush Color="{StaticResource BlueColor}" />
-                        </TextBlock.Foreground>
-                    </TextBlock>
-                </Grid>
-
-            </Button>
-            <Button Grid.Row="5"
-                    Margin="0,10,0,25"
-                    HorizontalContentAlignment="Stretch"
-                    VerticalContentAlignment="Stretch"
-                    FontSize="24"
-                    Style="{StaticResource ButtonStyle}" Grid.RowSpan="2"
-                    Command="{Binding MoveDownCommand}">
-                <Grid Margin="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition Width="0.5*" />
-                        <ColumnDefinition Width="3.5*" />
-                    </Grid.ColumnDefinitions>
-                    <ContentControl Margin="0,5"
-                                    ClipToBounds="True"
-                                    Content="{StaticResource DownArrowIcon}"
-                                    IsEnabled="False" />
-                    <TextBlock Grid.Column="2"
-                               Margin="0"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Center"
-                               Text="Вниз">
                         <TextBlock.Foreground>
                             <SolidColorBrush Color="{StaticResource BlueColor}" />
                         </TextBlock.Foreground>

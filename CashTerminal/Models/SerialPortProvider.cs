@@ -1,12 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO.Ports;
 
 namespace CashTerminal.Models
 {
     internal class SerialPortProvider
     {
-        private SerialPort _sp;
-        private static List<string> AllPortsName => new List<string>(SerialPort.GetPortNames());
+        private readonly SerialPort _sp;
+        public static List<string> AllPortsName => new List<string>(SerialPort.GetPortNames());
 
         public string PortName
         {
@@ -16,11 +17,6 @@ namespace CashTerminal.Models
                 if (AllPortsName.Contains(value))
                     _sp.PortName = value;
             }
-        }
-
-        public SerialPortProvider(SerialDataReceivedEventHandler handler)
-            : this(AllPortsName[0], 9600, Parity.None, 8, StopBits.One, handler)
-        {
         }
 
         public SerialPortProvider(string portName, SerialDataReceivedEventHandler handler)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO.Ports;
 using System.Runtime.CompilerServices;
@@ -7,29 +8,43 @@ using CashTerminal.Data;
 
 namespace CashTerminal.Models
 {
-    internal class MainModel
+    internal class MainModel : INotifyPropertyChanged
     {
         private SerialPortProvider _port;
         private IPrintable _printer;
         public Authorization Validator { get; set; }
         public DataBaseProvider DataBase { get; }
         public HistoryManager History { get; set; }
+        public List<ArticleRecord> Items => DataBase.Items;
 
-        public MainModel(string portName = "")
+        public MainModel()
         {
             History = new HistoryManager();
             DataBase = new DataBaseProvider();
-
-            _port = (portName == "") ?
-                new SerialPortProvider(DataReceived) : new SerialPortProvider(portName, DataReceived);
-        }
+            try
+            {
+                if (SerialPortProvider.AllPortsName.Count != 0)
+                _port = new SerialPortProvider(SerialPortProvider.AllPortsName[0], DataReceived);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+}
 
         public MainModel(IPrintable printer, string username, string password, string portName = "")
         {
             History = new HistoryManager();
+            try
+            {
+                if (SerialPortProvider.AllPortsName.Count != 0)
+                    _port = new SerialPortProvider(SerialPortProvider.AllPortsName[0], DataReceived);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
 
-            _port = (portName == "") ?
-                new SerialPortProvider(DataReceived) : new SerialPortProvider(portName, DataReceived);
 
             DataBase = new DataBaseProvider();
             _printer = printer;
@@ -56,6 +71,15 @@ namespace CashTerminal.Models
 
             if (art != null)
                 History.Log($"Добавлен товар: {art.Name}");
+            OnPropertyChanged("Items");
+
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 

@@ -11,7 +11,7 @@ namespace CashTerminal.Models
     internal class DataBaseProvider
     {
         private SupermarketDataEntities ent;
-        public ObservableCollection<ArticleRecord> Items { get; private set; }
+        public List<ArticleRecord> Items { get; private set; }
 
         public void AddArticle(Article art)
         {
@@ -30,7 +30,7 @@ namespace CashTerminal.Models
 
         public DataBaseProvider()
         {
-            Items = new ObservableCollection<ArticleRecord>();
+            Items = new List<ArticleRecord>();
         }
 
         public Article GetArticle(long id)
