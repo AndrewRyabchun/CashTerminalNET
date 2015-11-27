@@ -8,6 +8,9 @@ using CashTerminal.Data;
 
 namespace CashTerminal.Models
 {
+    /// <summary>
+    /// Основная логика приложения.
+    /// </summary>
     internal class MainModel : INotifyPropertyChanged
     {
         private SerialPortProvider _port;
@@ -17,24 +20,13 @@ namespace CashTerminal.Models
         public HistoryManager History { get; set; }
         public List<ArticleRecord> Items => DataBase.Items;
 
+        /// <summary>
+        /// Инициализирует экземпляр класса MainModel.
+        /// </summary>
         public MainModel()
         {
             History = new HistoryManager();
             DataBase = new DataBaseProvider();
-            try
-            {
-                if (SerialPortProvider.AllPortsName.Count != 0)
-                _port = new SerialPortProvider(SerialPortProvider.AllPortsName[0], DataReceived);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-            }
-}
-
-        public MainModel(IPrintable printer, string username, string password, string portName = "")
-        {
-            History = new HistoryManager();
             try
             {
                 if (SerialPortProvider.AllPortsName.Count != 0)
@@ -44,19 +36,22 @@ namespace CashTerminal.Models
             {
                 MessageBox.Show(e.Message);
             }
-
-
-            DataBase = new DataBaseProvider();
-            _printer = printer;
-            Validator = new Authorization(username, password);
         }
 
+        /// <summary>
+        /// Позволяет сменить метод вывода информации
+        /// </summary>
+        /// <param name="printer"></param>
         public void SetPrinter(IPrintable printer)
         {
             _printer = printer;
         }
 
-
+        /// <summary>
+        /// Обработчик события, указывающего на получение информации по COM порту.
+        /// </summary>
+        /// <param name="sender">Источник события.</param>
+        /// <param name="e">Обьект, содержащий данные события.</param>
         private void DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             long id = -1;
@@ -75,8 +70,15 @@ namespace CashTerminal.Models
 
         }
 
+        /// <summary>
+        /// Представляет метод, который обрабатывает событие PropertyChanged, возникающее при изменении свойства компонента.
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// Вызывает событие PropertyChanged с предоставленными аргументами.
+        /// </summary>
+        /// <param name="propertyName">Имя измененного свойства.</param>
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

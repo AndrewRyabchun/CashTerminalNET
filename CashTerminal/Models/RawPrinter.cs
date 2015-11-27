@@ -7,18 +7,38 @@ using System.Threading.Tasks;
 
 namespace CashTerminal.Models
 {
-    class RawPrinter : IPrintable
+    /// <summary>
+    /// Предоставляет методы для создания чека с заданной шириной строки.
+    /// </summary>
+    internal class RawPrinter : IPrintable
     {
-        int _lineWidth;
-        int _cashDeskNumber;
+        /// <summary>
+        /// Ширина строки текста.
+        /// </summary>
+        readonly int _lineWidth;
 
+        /// <summary>
+        /// Номер кассы, на которой был создан чек.
+        /// </summary>
+        readonly int _cashDeskNumber;
+
+        /// <summary>
+        /// Инициализирует экземпляр класса RawPrinter, используя заданные ширину текста и номер кассы.
+        /// </summary>
+        /// <param name="width">Ширина линии текста</param>
+        /// <param name="cashDeskNumber">Номер кассы</param>
         public RawPrinter(int width, int cashDeskNumber)
         {
             _lineWidth = width;
             _cashDeskNumber = cashDeskNumber;
         }
 
-        public IEnumerable<string> GenerateOutput(ObservableCollection<ArticleRecord> items)
+        /// <summary>
+        /// Создает чек с заданной шириной линии.
+        /// </summary>
+        /// <param name="items">Содержит всю информацию об артикулах, содержащихся в чеке.</param>
+        /// <returns></returns>
+        public IEnumerable<string> GenerateOutput(List<ArticleRecord> items)
         {
             List<string> cheque = new List<string>();
 
@@ -39,13 +59,15 @@ namespace CashTerminal.Models
             return cheque;
         }
 
+        /// <summary>
+        /// Создает заголовок чека
+        /// </summary>
+        /// <returns>Заголовок чека</returns>
         private string[] Heading()
         {
-            List<string> arr = new List<string>();
+            List<string> arr = new List<string> { new string('=', _lineWidth) };
 
-            arr.Add(new string('=', _lineWidth));
-
-            arr.AddRange(CompressString($"* Добро пожаловать!!!"));
+            arr.AddRange(CompressString("* Добро пожаловать!!!"));
 
             DateTime now = DateTime.Now;
             arr.AddRange(CompressString($"* Чек создан: {now.Day}.{now.Month}.{now.Year} {now.Hour}:{now.Minute}:{now.Second}"));
@@ -55,33 +77,35 @@ namespace CashTerminal.Models
             return arr.ToArray();
         }
 
+        /// <summary>
+        /// Разбивает строку на массив строк фиксированной длинны.
+        /// </summary>
+        /// <param name="str">Строка для разбивания.</param>
+        /// <returns>Массив строк фиксированной длинны.</returns>
         private string[] CompressString(string str)
         {
             if (str.Length < _lineWidth)
                 return new[] { str };
 
-            else
+            int start = 0;
+
+            List<string> lines = new List<string>();
+
+            while (true)
             {
-                int start = 0;
+                lines.Add(Convert.ToString(str.Substring(start, _lineWidth)));
 
-                List<string> lines = new List<string>();
+                start += _lineWidth;
 
-                while (true)
+                if (start + _lineWidth >= str.Length)
                 {
-                    lines.Add(Convert.ToString(str.Substring(start, _lineWidth)));
+                    lines.Add(str.Substring(start, str.Length - start));
 
-                    start += _lineWidth;
-
-                    if (start + _lineWidth >= str.Length)
-                    {
-                        lines.Add(str.Substring(start, str.Length - start));
-
-                        break;
-                    }
+                    break;
                 }
-
-                return lines.ToArray();
             }
+
+            return lines.ToArray();
         }
     }
 }

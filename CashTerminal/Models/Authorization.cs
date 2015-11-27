@@ -8,8 +8,16 @@ using System.Security.Cryptography;
 
 namespace CashTerminal.Models
 {
-    class Authorization
+    /// <summary>
+    /// Отвечает за авторизацию пользователя
+    /// </summary>
+    internal class Authorization
     {
+        /// <summary>
+        /// Инициализирует экземпляр класса Authorization, используя заданные имя пользователя и пароль.
+        /// </summary>
+        /// <param name="username">Имя пользователя</param>
+        /// <param name="password">Пароль пользоваетля</param>
         public Authorization(string username, string password)
         {
             IsValid = Authorize(username, password);
@@ -17,11 +25,22 @@ namespace CashTerminal.Models
                 Username = username;
         }
 
+        /// <summary>
+        /// Проверяет пройденность пользователем процедуры авторизации.
+        /// </summary>
         public bool IsValid { get; }
 
+        /// <summary>
+        /// Имя пользователя.
+        /// </summary>
         public string Username { get; }
 
-        //do async
+        /// <summary>
+        /// Обеспечивает авторизацию.
+        /// </summary>
+        /// <param name="username">Имя пользователя.</param>
+        /// <param name="password">Пароль пользователя.</param>
+        /// <returns>Результат авторизации.</returns>
         private bool Authorize(string username, string password)
         {
             var hash = SHA1HashStringForUTF8String(password).ToUpper();
@@ -36,6 +55,11 @@ namespace CashTerminal.Models
             }
         }
 
+        /// <summary>
+        /// Производит хеширование строки по алгоритму SHA1.
+        /// </summary>
+        /// <param name="s">Строка для шифрования.</param>
+        /// <returns>Строка, зашифрованая по алгоритму SHA1.</returns>
         private string SHA1HashStringForUTF8String(string s)
         {
             byte[] bytes = Encoding.UTF8.GetBytes(s);
@@ -48,6 +72,11 @@ namespace CashTerminal.Models
             }
         }
 
+        /// <summary>
+        /// Переводит масив байтов в строку цифр шестнадцатеричной системы счисления.
+        /// </summary>
+        /// <param name="bytes">Массив для преобразования.</param>
+        /// <returns>Строка цифр шестнадцатеричной системы счисления.</returns>
         private static string HexStringFromBytes(byte[] bytes)
         {
             var sb = new StringBuilder();
