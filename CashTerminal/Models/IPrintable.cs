@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.IO.Ports;
 
 namespace CashTerminal.Models
 {
@@ -14,5 +14,7 @@ namespace CashTerminal.Models
         /// <param name="items">Список строк с информацией, подлежащей форматированию.</param>
         /// <returns>Коллекция, которая реализовывает интерфейс IEnumerable.</returns>
         IEnumerable<string> GenerateOutput(List<ArticleRecord> items);
+
+        void Send(List<ArticleRecord> items, SerialPort sp);
     }
 }

@@ -14,7 +14,7 @@ namespace CashTerminal.Models
     internal class MainModel : INotifyPropertyChanged
     {
         private SerialPortProvider _port;
-        private IPrintable _printer;
+        public IPrintable Printer { get; private set; }
         public Authorization Validator { get; set; }
         public DataBaseProvider DataBase { get; }
         public HistoryManager History { get; set; }
@@ -44,7 +44,7 @@ namespace CashTerminal.Models
         /// <param name="printer"></param>
         public void SetPrinter(IPrintable printer)
         {
-            _printer = printer;
+            Printer = printer;
         }
 
         /// <summary>

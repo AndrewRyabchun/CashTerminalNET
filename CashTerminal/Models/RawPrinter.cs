@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -57,6 +58,18 @@ namespace CashTerminal.Models
             cheque.AddRange(CompressString($"Сума: {sum} грн."));
 
             return cheque;
+        }
+
+        public void Send(List<ArticleRecord> items, SerialPort sp)
+        {
+            string cheque = string.Join("",GenerateOutput(items));
+
+            if (sp != null)
+            {
+                sp.Open();
+                sp.Write(cheque);
+                sp.Close();
+            }
         }
 
         /// <summary>

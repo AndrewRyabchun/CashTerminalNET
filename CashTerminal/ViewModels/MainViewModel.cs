@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Data.Entity;
 using System.Diagnostics;
+using System.IO.Ports;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -50,7 +51,10 @@ namespace CashTerminal.ViewModels
         {
             get
             {
-                return Model.Items.Count != 0 ? Model.Items[SelectedIndex].Name : String.Empty;
+                string shortenName = Model.Items.Count != 0 ? Model.Items[SelectedIndex].Name.Substring(0,
+                    Math.Min(Model.Items[SelectedIndex].Name.Length, 90)) : String.Empty;
+
+                return shortenName;
             }
         }
 
@@ -105,6 +109,8 @@ namespace CashTerminal.ViewModels
             {
                 UpdateUI();
             };
+
+            Model.SetPrinter(new RawPrinter(80, Settings.TerminalNumber));
 
             //init commands
             LogoffCommand = new RelayCommand(Logoff);
@@ -187,7 +193,11 @@ namespace CashTerminal.ViewModels
 
         private void Checkout(object obj)
         {
+            Model.Printer.Send(Model.Items, new SerialPort(Settings.PrinterPort));
+            Model.DataBase.Items.Clear();
+            Model.History.History.Clear();
 
+            UpdateUI();
         }
 
         private void ChangeCount(object obj)
