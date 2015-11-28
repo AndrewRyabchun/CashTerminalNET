@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using CashTerminal.Commons;
 using CashTerminal.Data;
+using CashTerminal.Models;
 
 namespace CashTerminal.ViewModels
 {
@@ -35,6 +36,11 @@ namespace CashTerminal.ViewModels
 
         private void Add(object obj)
         {
+            if (SelectedResult==null)
+                return;
+            _parent.Model.Items.Add(new ArticleRecord(SelectedResult));
+            _parent.UpdateUI();
+            _parent.CloseOverlay();
         }
 
         private async void Search(object obj)

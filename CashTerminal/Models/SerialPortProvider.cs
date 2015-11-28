@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO.Ports;
+using System.Windows;
 
 namespace CashTerminal.Models
 {
@@ -27,8 +28,19 @@ namespace CashTerminal.Models
             get { return _sp.PortName; }
             set
             {
-                if (AllPortsName.Contains(value))
-                    _sp.PortName = value;
+                try
+                {
+                    if (AllPortsName.Contains(value))
+                    {
+                        _sp.Close();
+                        _sp.PortName = value;
+                        _sp.Open();
+                    }
+                }
+                catch(Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                }     
             }
         }
 

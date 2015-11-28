@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
@@ -18,20 +19,18 @@ namespace CashTerminal.Models
         /// </summary>
         readonly int _lineWidth;
 
-        /// <summary>
-        /// Номер кассы, на которой был создан чек.
-        /// </summary>
-        readonly int _cashDeskNumber;
+        public string FileExt { get; }
+
 
         /// <summary>
         /// Инициализирует экземпляр класса RawPrinter, используя заданные ширину текста и номер кассы.
         /// </summary>
-        /// <param name="width">Ширина линии текста</param>
-        /// <param name="cashDeskNumber">Номер кассы</param>
-        public RawPrinter(int width, int cashDeskNumber)
+        /// <param name="width">Ширина линии текста.</param>
+        /// <param name="ext">Расширение файла чека.</param>
+        public RawPrinter(int width, string ext)
         {
             _lineWidth = width;
-            _cashDeskNumber = cashDeskNumber;
+            FileExt = ext;
         }
 
         /// <summary>
@@ -47,30 +46,30 @@ namespace CashTerminal.Models
 
             foreach (ArticleRecord item in items)
             {
-                cheque.Add("\n");
+                cheque.Add(Environment.NewLine);
                 cheque.AddRange(CompressString($"- {item.Price} * {item.Count} = {item.FullPrice} | {item.Name}"));
             }
 
             cheque.Add(new string('=', _lineWidth));
 
             decimal sum = items.Sum(x => x.FullPrice);
-
+            cheque.Add(Environment.NewLine);
             cheque.AddRange(CompressString($"Сума: {sum} грн."));
 
             return cheque;
         }
 
-        public void Send(List<ArticleRecord> items, SerialPort sp)
+        public void Send(List<ArticleRecord> items, Stream stream)
         {
-            string cheque = string.Join("",GenerateOutput(items));
+            string cheque = string.Join("", GenerateOutput(items));
 
-            if (sp != null)
-            {
-                sp.Open();
-                sp.Write(cheque);
-                sp.Close();
-            }
+            var bytes = Encoding.Unicode.GetBytes(cheque.ToCharArray());
+            if (stream != null && stream.CanWrite)
+                stream.Write(bytes, 0, bytes.Length);
+
         }
+
+
 
         /// <summary>
         /// Создает заголовок чека
@@ -78,13 +77,14 @@ namespace CashTerminal.Models
         /// <returns>Заголовок чека</returns>
         private string[] Heading()
         {
-            List<string> arr = new List<string> { new string('=', _lineWidth) };
+            List<string> arr = new List<string> { (new string('=', _lineWidth) + Environment.NewLine) };
 
             arr.AddRange(CompressString("* Добро пожаловать!!!"));
+            arr.Add(Environment.NewLine);
 
             DateTime now = DateTime.Now;
             arr.AddRange(CompressString($"* Чек создан: {now.Day}.{now.Month}.{now.Year} {now.Hour}:{now.Minute}:{now.Second}"));
-            arr.AddRange(CompressString($"* Номер касы: {_cashDeskNumber}"));
+            arr.Add(Environment.NewLine);
             arr.Add(new string('=', _lineWidth));
 
             return arr.ToArray();
@@ -106,13 +106,13 @@ namespace CashTerminal.Models
 
             while (true)
             {
-                lines.Add(Convert.ToString(str.Substring(start, _lineWidth)));
+                lines.Add(Convert.ToString(str.Substring(start, _lineWidth)) + Environment.NewLine);
 
                 start += _lineWidth;
 
                 if (start + _lineWidth >= str.Length)
                 {
-                    lines.Add(str.Substring(start, str.Length - start));
+                    lines.Add(str.Substring(start, str.Length - start)+Environment.NewLine);
 
                     break;
                 }

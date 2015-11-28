@@ -7,7 +7,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:v="clr-namespace:CashTerminal.Views"
         xmlns:vm="clr-namespace:CashTerminal.ViewModels"
-        Title="MainWindow"
+        Title="Cash Terminal"
         Width="800"
         Height="600"
         MinWidth="811"
@@ -15,6 +15,7 @@
         FontSize="16"
         ResizeMode="CanResizeWithGrip"
         Visibility="Visible"
+        Icon="../favicon.ico"
         mc:Ignorable="d">
     <Window.DataContext>
         <vm:MainViewModel />
@@ -225,23 +226,23 @@
                       ItemsSource="{Binding ArticleRecords}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Width="1.5*"
-                                        Binding="{Binding ID}"
+                                        Binding="{Binding ID, Mode=OneWay}"
                                         CanUserSort="False"
                                         Header="Код" />
                     <DataGridTextColumn Width="3*"
-                                        Binding="{Binding Name}"
+                                        Binding="{Binding Name, Mode=OneWay}"
                                         CanUserSort="False"
                                         Header="Название" />
                     <DataGridTextColumn Width="1.5*"
-                                        Binding="{Binding Price}"
+                                        Binding="{Binding Price, Mode=OneWay}"
                                         CanUserSort="False"
                                         Header="Цена" />
                     <DataGridTextColumn Width="1.5*"
-                                        Binding="{Binding Count}"
+                                        Binding="{Binding Count, Mode=OneWay}"
                                         CanUserSort="False"
                                         Header="Количество" />
                     <DataGridTextColumn Width="1.5*"
-                                        Binding="{Binding FullPrice}"
+                                        Binding="{Binding FullPrice, Mode=OneWay}"
                                         CanUserSort="False"
                                         Header="Стоимость" />
                 </DataGrid.Columns>

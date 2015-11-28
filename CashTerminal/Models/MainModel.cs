@@ -17,25 +17,49 @@ namespace CashTerminal.Models
         public IPrintable Printer { get; private set; }
         public Authorization Validator { get; set; }
         public DataBaseProvider DataBase { get; }
-        public HistoryManager History { get; set; }
         public List<ArticleRecord> Items => DataBase.Items;
+
+        /// <summary>
+        /// Имя порта для сканера.
+        /// </summary>
+        public string ScannerPort
+        {
+            get { return _port?.PortName; }
+            set
+            {
+                if (_port != null)
+                    _port.PortName = value;
+            }
+        }
 
         /// <summary>
         /// Инициализирует экземпляр класса MainModel.
         /// </summary>
         public MainModel()
         {
-            History = new HistoryManager();
             DataBase = new DataBaseProvider();
-            try
+
+
+            for (int i = 0; i < SerialPortProvider.AllPortsName.Count; i++)
             {
-                if (SerialPortProvider.AllPortsName.Count != 0)
-                    _port = new SerialPortProvider(SerialPortProvider.AllPortsName[0], DataReceived);
+                try
+                {
+                    _port = new SerialPortProvider(SerialPortProvider.AllPortsName[i], DataReceived);
+                    break;
+                }
+                catch
+                {
+                    //ignore
+                }
             }
-            catch (Exception e)
+
+            if (_port == null)
             {
-                MessageBox.Show(e.Message);
+                MessageBox.Show("Все порты недоступны");
+                Application.Current.Shutdown(0);
             }
+            MessageBox.Show($"Порт для сканера: {_port.PortName}");
+
         }
 
         /// <summary>
@@ -64,8 +88,6 @@ namespace CashTerminal.Models
 
             Application.Current.Dispatcher.Invoke(() => { DataBase.AddArticle(art); });
 
-            if (art != null)
-                History.Log($"Добавлен товар: {art.Name}");
             OnPropertyChanged("Items");
 
         }

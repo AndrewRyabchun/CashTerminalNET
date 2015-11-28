@@ -50,8 +50,16 @@ namespace CashTerminal.Models
                              where d.Username == username &&
                                 d.PasswordHash.ToUpper() == hash
                              select d;
-                var res = wanted.ToList();
-                return res.Count != 0;
+                try
+                {
+                    var res = wanted.ToList();
+                    return res.Count != 0;
+                }
+                catch
+                {
+                    return false;
+                }
+                
             }
         }
 

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Globalization;
+using System.Windows;
 
 namespace CashTerminal.Views
 {
@@ -9,6 +10,8 @@ namespace CashTerminal.Views
     {
         public MainView()
         {
+            CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("ru-RU");
+            CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("ru-RU");
             InitializeComponent();
         }
     }

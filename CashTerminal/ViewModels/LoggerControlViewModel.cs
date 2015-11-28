@@ -3,6 +3,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Input;
 using CashTerminal.Commons;
+using CashTerminal.Models;
 using Microsoft.Win32;
 
 namespace CashTerminal.ViewModels
@@ -22,7 +23,8 @@ namespace CashTerminal.ViewModels
             ExportCommand = new RelayCommand(Export);
 
             var sb = new StringBuilder();
-            foreach (var str in _parent.Model.History.History)
+            var hist = HistoryManager.Instance.History;
+            foreach (var str in hist)
                 sb.AppendLine(str);
             LogText = sb.ToString();
         }

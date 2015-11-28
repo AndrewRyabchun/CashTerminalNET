@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.IO.Ports;
 
 namespace CashTerminal.Models
@@ -15,6 +16,8 @@ namespace CashTerminal.Models
         /// <returns>Коллекция, которая реализовывает интерфейс IEnumerable.</returns>
         IEnumerable<string> GenerateOutput(List<ArticleRecord> items);
 
-        void Send(List<ArticleRecord> items, SerialPort sp);
+        void Send(List<ArticleRecord> items, Stream stream);
+
+        string FileExt { get; }
     }
 }

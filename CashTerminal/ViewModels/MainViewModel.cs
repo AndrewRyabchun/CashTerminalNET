@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Data.Entity;
 using System.Diagnostics;
+using System.IO;
 using System.IO.Ports;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -21,11 +22,14 @@ namespace CashTerminal.ViewModels
 {
     internal class MainViewModel : ViewModelBase, IOverlayable
     {
+        /// <summary>
+        /// Логин пользователя
+        /// </summary>
         public string UserName => "Пользователь: " + Model.Validator?.Username;
         public string Uptime => "Время сеанса: " + Timer.SessionTime.ToString(@"hh\:mm\:ss");
         public ObservableCollection<ArticleRecord> ArticleRecords => new ObservableCollection<ArticleRecord>(Model.Items);
-        private int _selectedIndex;
 
+        private int _selectedIndex;
         public int SelectedIndex
         {
             get { return _selectedIndex; }
@@ -36,7 +40,6 @@ namespace CashTerminal.ViewModels
                 OnPropertyChanged("LastArticlePriceData");
             }
         }
-
         public string ArticleID { get; set; }
         public string TotalValue
         {
@@ -46,7 +49,6 @@ namespace CashTerminal.ViewModels
                 return string.Format("{0:F} грн.", sum);
             }
         }
-
         public string LastArticleName
         {
             get
@@ -57,7 +59,6 @@ namespace CashTerminal.ViewModels
                 return shortenName;
             }
         }
-
         public string LastArticlePriceData
         {
             get
@@ -69,6 +70,9 @@ namespace CashTerminal.ViewModels
             }
         }
 
+        /// <summary>
+        /// Cписок объектов логики представления. Содержит 0 или 1 элемент.
+        /// </summary>
         public ObservableCollection<ViewModelBase> OverlayedControl { get; }
 
         #region Commands
@@ -86,6 +90,9 @@ namespace CashTerminal.ViewModels
 
         #endregion
 
+        /// <summary>
+        /// Возвращает видимость перекрытия на основе количества элементов в списке объектов логики представления
+        /// </summary>
         public Visibility OverlayVisibility
         {
             get { return OverlayedControl?.Count != 0 ? Visibility.Visible : Visibility.Collapsed; }
@@ -110,7 +117,7 @@ namespace CashTerminal.ViewModels
                 UpdateUI();
             };
 
-            Model.SetPrinter(new RawPrinter(80, Settings.TerminalNumber));
+            Model.SetPrinter(new RawPrinter(80, ".txt"));
 
             //init commands
             LogoffCommand = new RelayCommand(Logoff);
@@ -193,10 +200,16 @@ namespace CashTerminal.ViewModels
 
         private void Checkout(object obj)
         {
-            Model.Printer.Send(Model.Items, new SerialPort(Settings.PrinterPort));
+            var sum = (from item in Model.DataBase.Items
+                select item.Price).Sum();
+            if (Model.DataBase.Items.Count!=0)
+                HistoryManager.Instance.Log($"Выписан чек на сумму {sum} грн.");
+            string path = $"D:\\Cheque_{DateTime.Now.ToString().Replace(":", "-")}{Model.Printer.FileExt}";
+            using (var fs = new FileStream(path, FileMode.OpenOrCreate))
+            {
+                Model.Printer.Send(Model.Items, fs);
+            }
             Model.DataBase.Items.Clear();
-            Model.History.History.Clear();
-
             UpdateUI();
         }
 
@@ -219,15 +232,31 @@ namespace CashTerminal.ViewModels
             UpdateUI();
         }
         #endregion
-
+        
+        /// <summary>
+        /// Закрывает элемент интерфейса - перекрытие. Определяется в IOverlayable
+        /// </summary>
         public void CloseOverlay()
         {
+            try
+            {
+                if (Settings.ScannerPort != null)
+                    Model.ScannerPort = Settings.ScannerPort;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return;
+            }
             OverlayedControl.Clear();
             OnPropertyChanged("OverlayVisibility");
             OnPropertyChanged("UserName");
 
         }
 
+        /// <summary>
+        /// Обновляет элементы графического интерфейса. Определяется в IOverlayable
+        /// </summary>
         public void UpdateUI()
         {
             OnPropertyChanged("ArticleRecords");

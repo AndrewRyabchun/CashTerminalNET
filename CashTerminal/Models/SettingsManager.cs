@@ -22,15 +22,7 @@ namespace CashTerminal.Models
         /// </summary>
         public string ScannerPort { get; set; }
 
-        /// <summary>
-        /// Имя порта, используемого для подачи чека на печать.
-        /// </summary>
-        public string PrinterPort { get; set; }
 
-        /// <summary>
-        /// Номер кассы, на которой развернута текущая сессия.
-        /// </summary>
-        public int TerminalNumber { get; set; }
 
         /// <summary>
         /// Инициализирует новый экземпляр класса SettingsManager.
@@ -38,12 +30,6 @@ namespace CashTerminal.Models
         public SettingsManager()
         {
             PortNames = SerialPort.GetPortNames();
-            if (PortNames.Length > 1)
-            {
-                ScannerPort = PortNames.First();
-                PrinterPort = PortNames.Last();
-            }
-            TerminalNumber = 0;
         }
     }
 }

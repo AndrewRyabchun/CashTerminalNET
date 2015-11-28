@@ -11,13 +11,25 @@ namespace CashTerminal.Models
         /// <summary>
         /// Содержит набор записей, созданных во время сеанса программы.
         /// </summary>
-        public List<string> History { get; } = new List<string>();
+        public List<string> History { get; }
+
+        private static HistoryManager _instance;
+        public static HistoryManager Instance
+        {
+            get
+            {
+                if (_instance==null)
+                    _instance = new HistoryManager();
+                return _instance;
+            }
+        }
 
         /// <summary>
         /// Инициализирует экземпляр класса HistoryManager.
         /// </summary>
         public HistoryManager()
         {
+            History = new List<string>();
             Log("Создан файл истории");
         }
 
