@@ -9,15 +9,15 @@ using System.Security.Cryptography;
 namespace CashTerminal.Models
 {
     /// <summary>
-    /// Отвечает за авторизацию пользователя
+    /// Отвечает за авторизацию пользователя.
     /// </summary>
     internal class Authorization
     {
         /// <summary>
         /// Инициализирует экземпляр класса Authorization, используя заданные имя пользователя и пароль.
         /// </summary>
-        /// <param name="username">Имя пользователя</param>
-        /// <param name="password">Пароль пользоваетля</param>
+        /// <param name="username">Имя пользователя.</param>
+        /// <param name="password">Пароль пользоваетля.</param>
         public Authorization(string username, string password)
         {
             IsValid = Authorize(username, password);
@@ -59,7 +59,7 @@ namespace CashTerminal.Models
                 {
                     return false;
                 }
-                
+
             }
         }
 

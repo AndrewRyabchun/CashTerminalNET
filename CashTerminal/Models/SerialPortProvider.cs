@@ -12,17 +12,17 @@ namespace CashTerminal.Models
     internal class SerialPortProvider
     {
         /// <summary>
-        /// Используемый для чтения порт
+        /// Используемый для чтения порт.
         /// </summary>
         private readonly SerialPort _sp;
 
         /// <summary>
-        /// Список всех доступных портов
+        /// Список всех доступных портов.
         /// </summary>
         public static List<string> AllPortsName => new List<string>(SerialPort.GetPortNames());
 
         /// <summary>
-        /// Имя порта
+        /// Имя порта.
         /// </summary>
         public string PortName
         {
@@ -38,17 +38,17 @@ namespace CashTerminal.Models
                         _sp.Open();
                     }
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     UIMediator.Instance.Update(e.Message);
-                }     
+                }
             }
         }
 
         /// <summary>
         /// Инициализирует новый экземпляр класса SerialPortProvider, используя указанное имя порта.
         /// </summary>
-        /// <param name="portName">Имя порта</param>
+        /// <param name="portName">Имя порта.</param>
         /// <param name="handler">Делегат-обработчик события - получения данных.</param>
         public SerialPortProvider(string portName, SerialDataReceivedEventHandler handler)
             : this(portName, 9600, Parity.None, 8, StopBits.One, handler)
@@ -74,7 +74,7 @@ namespace CashTerminal.Models
                 DtrEnable = true
             };
 
-            //Prevents from catching NullReferenceException if handler is null or not properly assigned for event
+            //Позволяет избежать проверок на NullReferenceException, если обработчкику события присвоено null.
             _sp.DataReceived += delegate { };
             _sp.DataReceived += handler;
 

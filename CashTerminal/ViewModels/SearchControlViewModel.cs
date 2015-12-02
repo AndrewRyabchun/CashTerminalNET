@@ -36,7 +36,7 @@ namespace CashTerminal.ViewModels
 
         private void Add(object obj)
         {
-            if (SelectedResult==null)
+            if (SelectedResult == null)
                 return;
             _parent.Model.Items.Add(new ArticleRecord(SelectedResult));
             _parent.UpdateUI();

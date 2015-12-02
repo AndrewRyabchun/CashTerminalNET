@@ -18,7 +18,7 @@ namespace CashTerminal.Models
         {
             get
             {
-                if (_instance==null)
+                if (_instance == null)
                     _instance = new HistoryManager();
                 return _instance;
             }
@@ -42,7 +42,7 @@ namespace CashTerminal.Models
             string date = DateTime.Now.ToShortDateString();
             string time = DateTime.Now.ToShortTimeString();
 
-            History.Add($"{date}|{time}|{message}");
+            History.Add($"{date} | {time} | {message}");
         }
     }
 }

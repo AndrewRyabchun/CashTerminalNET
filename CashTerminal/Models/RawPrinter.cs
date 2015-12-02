@@ -72,9 +72,9 @@ namespace CashTerminal.Models
 
 
         /// <summary>
-        /// Создает заголовок чека
+        /// Создает заголовок чека.
         /// </summary>
-        /// <returns>Заголовок чека</returns>
+        /// <returns>Заголовок чека.</returns>
         private string[] Heading()
         {
             List<string> arr = new List<string> { new string('=', _lineWidth) + Environment.NewLine };

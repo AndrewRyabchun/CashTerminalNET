@@ -62,11 +62,11 @@ namespace CashTerminal.Models
             {
                 UIMediator.Instance.Update($"Порт для сканера: {_port.PortName}.");
             }
-           
+
         }
 
         /// <summary>
-        /// Позволяет сменить метод вывода информации
+        /// Позволяет сменить метод вывода информации.
         /// </summary>
         /// <param name="printer"></param>
         public void SetPrinter(IPrintable printer)

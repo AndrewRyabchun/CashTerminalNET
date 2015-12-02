@@ -48,7 +48,7 @@ namespace CashTerminal.Models
             {
                 Items.Add(new ArticleRecord(art));
             }
-            
+
             HistoryManager.Instance.Log($"Добавлен товар: {art.Name}");
         }
 

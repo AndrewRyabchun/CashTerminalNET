@@ -64,6 +64,8 @@ namespace CashTerminal.ViewModels
         {
             get
             {
+                if (SelectedIndex == -1) return String.Empty;
+
                 string shortenName = Model.Items.Count != 0 ? Model.Items[SelectedIndex].Name.Substring(0,
                     Math.Min(Model.Items[SelectedIndex].Name.Length, 90)) : String.Empty;
 
@@ -74,7 +76,7 @@ namespace CashTerminal.ViewModels
         {
             get
             {
-                if (Model.Items.Count == 0)
+                if (Model.Items.Count == 0 || SelectedIndex == -1)
                     return String.Empty;
                 var item = Model.Items[SelectedIndex];
                 return $"{item.Price} x {item.Count} = {item.FullPrice}";
@@ -142,9 +144,7 @@ namespace CashTerminal.ViewModels
 
             UIMediator.Instance.Action = (str) => { StatusText = str; };
 
-            //show login overlay
-            //OverlayedControl = new ObservableCollection<ViewModelBase> { new LoginControlViewModel(this) };
-            OverlayedControl = new ObservableCollection<ViewModelBase> {new SettingsControlViewModel(this)};
+            OverlayedControl = new ObservableCollection<ViewModelBase> { new LoginControlViewModel(this) };
         }
 
         #region OverlayCommandHandlers
@@ -204,7 +204,7 @@ namespace CashTerminal.ViewModels
             }
             else
             {
-                MessageBox.Show("Артикула не существует");
+                UIMediator.Instance.Update("Артикула не существует");
             }
 
         }
@@ -212,12 +212,13 @@ namespace CashTerminal.ViewModels
         private void Checkout(object obj)
         {
             var sum = (from item in Model.DataBase.Items
-                select item.Price).Sum();
+                       select item.Price).Sum();
             if (Model.DataBase.Items.Count != 0)
             {
                 HistoryManager.Instance.Log($"Выписан чек на сумму {sum} грн.");
                 string path =
                     $"{Settings.ChequeDirectory}Cheque_{DateTime.Now.ToString().Replace(":", "-")}{Model.Printer.FileExt}";
+
                 if (!Directory.Exists(Settings.ChequeDirectory))
                     Directory.CreateDirectory(Settings.ChequeDirectory);
                 using (var fs = new FileStream(path, FileMode.OpenOrCreate))
@@ -236,19 +237,24 @@ namespace CashTerminal.ViewModels
         private void ChangeCount(object obj)
         {
             var index = SelectedIndex;
-            if (index < 0 || Model.Items.Count==0) return;
+            if (index < 0 || Model.Items.Count == 0) return;
 
             var temp = Model.Items[index];
             Model.Items.RemoveAt(index);
             temp.Count++;
-            Model.Items.Insert(index,temp);
+            Model.Items.Insert(index, temp);
             UpdateUI();
         }
 
         private void Delete(object obj)
         {
-            if (SelectedIndex>=0 && Model.Items.Count != 0)
+            if (SelectedIndex >= 0 && Model.Items.Count != 0)
+            {
+                string articleName = Model.Items[SelectedIndex].Name;
+
                 Model.Items.RemoveAt(SelectedIndex);
+                HistoryManager.Instance.Log($"Удален товар: {articleName}");
+            }
             UpdateUI();
         }
         #endregion

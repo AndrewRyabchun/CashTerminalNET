@@ -51,17 +51,17 @@ namespace CashTerminal.Models
         public decimal FullPrice { get; private set; }
 
         /// <summary>
-        /// Идентификационный код товара
+        /// Идентификационный код товара.
         /// </summary>
         public long ID { get; private set; }
 
         /// <summary>
-        /// Название товара
+        /// Название товара.
         /// </summary>
         public string Name { get; private set; }
 
         /// <summary>
-        /// Стоимость единицы товара
+        /// Стоимость единицы товара.
         /// </summary>
         public decimal Price { get; private set; }
     }
