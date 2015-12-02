@@ -54,7 +54,7 @@ namespace CashTerminal.Models
 
             decimal sum = items.Sum(x => x.FullPrice);
             cheque.Add(Environment.NewLine);
-            cheque.AddRange(CompressString($"Сума: {sum} грн."));
+            cheque.AddRange(CompressString($"Сумма: {sum} грн."));
 
             return cheque;
         }
@@ -77,14 +77,13 @@ namespace CashTerminal.Models
         /// <returns>Заголовок чека</returns>
         private string[] Heading()
         {
-            List<string> arr = new List<string> { (new string('=', _lineWidth) + Environment.NewLine) };
+            List<string> arr = new List<string> { new string('=', _lineWidth) + Environment.NewLine };
 
             arr.AddRange(CompressString("* Добро пожаловать!!!"));
             arr.Add(Environment.NewLine);
 
             DateTime now = DateTime.Now;
-            arr.AddRange(CompressString($"* Чек создан: {now.Day}.{now.Month}.{now.Year} {now.Hour}:{now.Minute}:{now.Second}"));
-            arr.Add(Environment.NewLine);
+            arr.AddRange(CompressString($"* Чек создан: {now.Day}.{now.Month}.{now.Year} {now.Hour}:{now.Minute}:{now.Second}{Environment.NewLine}"));
             arr.Add(new string('=', _lineWidth));
 
             return arr.ToArray();

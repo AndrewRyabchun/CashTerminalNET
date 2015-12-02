@@ -21,6 +21,7 @@ namespace CashTerminal.Models
         /// Имя порта, используемого для получения идентификационных кодов артикулов.
         /// </summary>
         public string ScannerPort { get; set; }
+        public string ChequeDirectory { get; set; }
 
 
 

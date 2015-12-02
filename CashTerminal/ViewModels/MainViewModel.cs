@@ -29,6 +29,17 @@ namespace CashTerminal.ViewModels
         public string Uptime => "Время сеанса: " + Timer.SessionTime.ToString(@"hh\:mm\:ss");
         public ObservableCollection<ArticleRecord> ArticleRecords => new ObservableCollection<ArticleRecord>(Model.Items);
 
+        private string _status;
+        public string StatusText
+        {
+            get { return _status; }
+            set
+            {
+                _status = value;
+                OnPropertyChanged();
+            }
+        }
+
         private int _selectedIndex;
         public int SelectedIndex
         {
@@ -112,10 +123,7 @@ namespace CashTerminal.ViewModels
             Settings = new SettingsManager();
 
             Model = new MainModel();
-            Model.PropertyChanged += (sender, args) =>
-            {
-                UpdateUI();
-            };
+            Model.PropertyChanged += (o, args) => { UpdateUI(); };
 
             Model.SetPrinter(new RawPrinter(80, ".txt"));
 
@@ -131,6 +139,8 @@ namespace CashTerminal.ViewModels
             CheckoutCommand = new RelayCommand(Checkout);
             ChangeCountCommand = new RelayCommand(ChangeCount);
             DeleteCommand = new RelayCommand(Delete);
+
+            UIMediator.Instance.Action = (str) => { StatusText = str; };
 
             //show login overlay
             OverlayedControl = new ObservableCollection<ViewModelBase> { new LoginControlViewModel(this) };
@@ -204,7 +214,8 @@ namespace CashTerminal.ViewModels
                 select item.Price).Sum();
             if (Model.DataBase.Items.Count!=0)
                 HistoryManager.Instance.Log($"Выписан чек на сумму {sum} грн.");
-            string path = $"D:\\Cheque_{DateTime.Now.ToString().Replace(":", "-")}{Model.Printer.FileExt}";
+
+            string path = $"{Settings.ChequeDirectory}Cheque_{DateTime.Now.ToString().Replace(":", "-")}{Model.Printer.FileExt}";
             using (var fs = new FileStream(path, FileMode.OpenOrCreate))
             {
                 Model.Printer.Send(Model.Items, fs);
@@ -232,7 +243,9 @@ namespace CashTerminal.ViewModels
             UpdateUI();
         }
         #endregion
-        
+
+
+
         /// <summary>
         /// Закрывает элемент интерфейса - перекрытие. Определяется в IOverlayable
         /// </summary>

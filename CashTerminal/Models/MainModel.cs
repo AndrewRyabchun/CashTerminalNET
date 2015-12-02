@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.IO.Ports;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using CashTerminal.Commons;
 using CashTerminal.Data;
 
 namespace CashTerminal.Models
@@ -55,11 +56,13 @@ namespace CashTerminal.Models
 
             if (_port == null)
             {
-                MessageBox.Show("Все порты недоступны");
-                Application.Current.Shutdown(0);
+                UIMediator.Instance.Update("Нет доступных портов.");
             }
-            MessageBox.Show($"Порт для сканера: {_port.PortName}");
-
+            else
+            {
+                UIMediator.Instance.Update($"Порт для сканера: {_port.PortName}.");
+            }
+           
         }
 
         /// <summary>

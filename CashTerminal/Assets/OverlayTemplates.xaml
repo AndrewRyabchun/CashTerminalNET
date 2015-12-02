@@ -6,8 +6,6 @@
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     xmlns:vm="clr-namespace:CashTerminal.ViewModels"
                     mc:Ignorable="d">
-
-
     <DataTemplate x:Key="UnlockOverlay">
         <Grid Margin="10">
             <ContentControl Margin="0">
@@ -96,7 +94,6 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="40" />
                             <RowDefinition Height="40" />
-                            <RowDefinition Height="40" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
@@ -113,20 +110,17 @@
                                   Background="White"
                                   ItemsSource="{Binding SerialPortList}"
                                   SelectedItem="{Binding ScannerPort}" />
-                        <TextBlock Grid.Row="1"
-                                   Grid.Column="0"
+                        <StackPanel Grid.Row="1"
+                                    Grid.Column="0" 
+                                    Orientation="Vertical">
+                            <TextBlock 
                                    Margin="0,7"
                                    HorizontalAlignment="Left"
                                    VerticalAlignment="Center"
-                                   Text="Последовательный порт для принтера"
+                                   Text="Директория для чеков:"
                                    TextWrapping="Wrap" />
-                        <ComboBox Grid.Row="1"
-                                  Grid.Column="1"
-                                  Margin="0,4"
-                                  VerticalAlignment="Center"
-                                  Background="White"
-                                  ItemsSource="{Binding SerialPortList}"
-                                  SelectedItem="{Binding PrinterPort}" />
+                            <TextBox Text="{Binding ChequeDirectory}"/>
+                        </StackPanel>
                     </Grid>
                     <Button Margin="0,20,0,0"
                             HorizontalAlignment="Right"

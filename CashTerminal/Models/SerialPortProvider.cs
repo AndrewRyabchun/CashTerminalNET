@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO.Ports;
 using System.Windows;
+using CashTerminal.Commons;
 
 namespace CashTerminal.Models
 {
@@ -39,7 +40,7 @@ namespace CashTerminal.Models
                 }
                 catch(Exception e)
                 {
-                    MessageBox.Show(e.Message);
+                    UIMediator.Instance.Update(e.Message);
                 }     
             }
         }

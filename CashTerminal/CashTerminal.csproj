@@ -102,6 +102,7 @@
     <Compile Include="Commons\OverlayTemplateSelector.cs" />
     <Compile Include="Commons\PasswordBehavior.cs" />
     <Compile Include="Commons\RelayCommand.cs" />
+    <Compile Include="Commons\UIMediator.cs" />
     <Compile Include="Commons\ViewModelBase.cs" />
     <Compile Include="Models\Authorization.cs" />
     <Compile Include="Models\RawPrinter.cs" />
