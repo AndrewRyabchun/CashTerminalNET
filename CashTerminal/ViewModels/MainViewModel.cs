@@ -143,7 +143,8 @@ namespace CashTerminal.ViewModels
             UIMediator.Instance.Action = (str) => { StatusText = str; };
 
             //show login overlay
-            OverlayedControl = new ObservableCollection<ViewModelBase> { new LoginControlViewModel(this) };
+            //OverlayedControl = new ObservableCollection<ViewModelBase> { new LoginControlViewModel(this) };
+            OverlayedControl = new ObservableCollection<ViewModelBase> {new SettingsControlViewModel(this)};
         }
 
         #region OverlayCommandHandlers
@@ -212,13 +213,21 @@ namespace CashTerminal.ViewModels
         {
             var sum = (from item in Model.DataBase.Items
                 select item.Price).Sum();
-            if (Model.DataBase.Items.Count!=0)
-                HistoryManager.Instance.Log($"Выписан чек на сумму {sum} грн.");
-
-            string path = $"{Settings.ChequeDirectory}Cheque_{DateTime.Now.ToString().Replace(":", "-")}{Model.Printer.FileExt}";
-            using (var fs = new FileStream(path, FileMode.OpenOrCreate))
+            if (Model.DataBase.Items.Count != 0)
             {
-                Model.Printer.Send(Model.Items, fs);
+                HistoryManager.Instance.Log($"Выписан чек на сумму {sum} грн.");
+                string path =
+                    $"{Settings.ChequeDirectory}Cheque_{DateTime.Now.ToString().Replace(":", "-")}{Model.Printer.FileExt}";
+                if (!Directory.Exists(Settings.ChequeDirectory))
+                    Directory.CreateDirectory(Settings.ChequeDirectory);
+                using (var fs = new FileStream(path, FileMode.OpenOrCreate))
+                {
+                    Model.Printer.Send(Model.Items, fs);
+                }
+            }
+            else
+            {
+                UIMediator.Instance.Update("Нечего расчитывать.");
             }
             Model.DataBase.Items.Clear();
             UpdateUI();

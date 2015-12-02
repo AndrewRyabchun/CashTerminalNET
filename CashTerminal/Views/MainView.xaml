@@ -357,6 +357,7 @@
 
             </Button>
         </Grid>
+        <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="2" Text="{Binding StatusText}" FontSize="13.333"/>
         <Grid x:Name="overlay"
               Grid.RowSpan="3"
               Grid.ColumnSpan="2"
@@ -379,6 +380,5 @@
                 </ItemsControl>
             </Grid>
         </Grid>
-        <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="2" Text="{Binding StatusText}" FontSize="13.333"/>
     </Grid>
 </Window>
