@@ -21,6 +21,9 @@ namespace CashTerminal.ViewModels
 
         public string ChequeDirectory { get; set; }
 
+        /// <summary>
+        /// Комманда закрытия перекрытия.
+        /// </summary>
         public ICommand SaveCommand { get; set; }
 
 

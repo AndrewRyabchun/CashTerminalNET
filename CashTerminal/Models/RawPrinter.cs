@@ -19,6 +19,9 @@ namespace CashTerminal.Models
         /// </summary>
         readonly int _lineWidth;
 
+        /// <summary>
+        ///  Расширение файла чека.
+        /// </summary>
         public string FileExt { get; }
 
 
@@ -59,6 +62,11 @@ namespace CashTerminal.Models
             return cheque;
         }
 
+        /// <summary>
+        /// Пишет чек в указанный поток.
+        /// </summary>
+        /// <param name="items">Записи артикулов</param>
+        /// <param name="stream">Поток для записи</param>
         public void Send(List<ArticleRecord> items, Stream stream)
         {
             string cheque = string.Join("", GenerateOutput(items));
@@ -68,8 +76,6 @@ namespace CashTerminal.Models
                 stream.Write(bytes, 0, bytes.Length);
 
         }
-
-
 
         /// <summary>
         /// Создает заголовок чека.

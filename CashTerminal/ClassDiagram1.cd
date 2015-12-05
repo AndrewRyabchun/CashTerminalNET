@@ -1,28 +1,37 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="Классы интерфейса и побочные классы">
+    <Position X="14.79" Y="4.75" Height="0.291" Width="3.187" />
+  </Comment>
+  <Comment CommentText="Синглтоны">
+    <Position X="14.738" Y="2.467" Height="0.393" Width="1.551" />
+  </Comment>
+  <Comment CommentText="Реализации стратегии печати">
+    <Position X="14.75" Y="0.75" Height="0.346" Width="2.075" />
+  </Comment>
   <Class Name="CashTerminal.App" Collapsed="true">
-    <Position X="14.25" Y="0.5" Width="1.5" />
+    <Position X="14.75" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>App.xaml.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CashTerminal.Commons.OverlayTemplateSelector" Collapsed="true">
-    <Position X="19.5" Y="1.5" Width="1.5" />
+    <Position X="14.75" Y="7.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ggAAgAAAAAAAAAAAAAAAAAACAAAAQAAAAAAAAAAAAAQ=</HashCode>
       <FileName>Commons\OverlayTemplateSelector.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CashTerminal.Commons.PasswordBehavior" Collapsed="true">
-    <Position X="21.25" Y="1.5" Width="1.5" />
+    <Position X="14.75" Y="5.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAQAFAAAAAAAIAAAAAAAAAAAABACAAAAAAAAAAQ=</HashCode>
       <FileName>Commons\PasswordBehavior.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CashTerminal.Commons.RelayCommand" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="16" Y="2.5" Width="1.5" />
+    <Position X="16.5" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAgAEACAAQAAESAAAAAAABAAAAAAAAAAAAAEAA=</HashCode>
       <FileName>Commons\RelayCommand.cs</FileName>
@@ -38,78 +47,95 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="CashTerminal.Data.SupermarketDataEntities" Collapsed="true">
-    <Position X="14.25" Y="3.5" Width="1.5" />
+    <Position X="8.5" Y="7.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAACAIAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Data\DataBaseModel.Context.cs</FileName>
     </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Articles" />
+      <Property Name="Users" />
+    </ShowAsCollectionAssociation>
   </Class>
   <Class Name="CashTerminal.Data.Article" Collapsed="true">
-    <Position X="16" Y="0.5" Width="1.5" />
+    <Position X="7.25" Y="9.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAQAAgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Data\Article.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CashTerminal.Data.User" Collapsed="true">
-    <Position X="16" Y="3.5" Width="1.5" />
+    <Position X="9.5" Y="9.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AACAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Data\User.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CashTerminal.Models.ArticleRecord" Collapsed="true">
-    <Position X="17.75" Y="0.5" Width="1.5" />
+    <Position X="6.75" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAgAAAAAAQAAgAAAAAAAAAQAAAAAAAAAAACAAAAAAAA=</HashCode>
       <FileName>Models\ArticleRecord.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CashTerminal.Models.Authorization" Collapsed="true">
-    <Position X="19.5" Y="0.5" Width="1.5" />
+    <Position X="5" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAEAAAAAAAQgAAAAACAAAAAAAAAAAAAgAAAA=</HashCode>
       <FileName>Models\Authorization.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CashTerminal.Models.DataBaseProvider" Collapsed="true">
-    <Position X="21.25" Y="0.5" Width="1.5" />
+    <Position X="8.5" Y="6.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAACAAAADAAAAAAAAAAAAAAAAAAAEAAAAIAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAADAAAAAAAAAAAAAAAAAAAEAAAAIAABAA=</HashCode>
       <FileName>Models\DataBaseProvider.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_ent" />
+    </ShowAsAssociation>
   </Class>
   <Class Name="CashTerminal.Models.HistoryManager" Collapsed="true">
-    <Position X="14.25" Y="1.5" Width="1.5" />
+    <Position X="14.75" Y="3" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAACAAAAAAA=</HashCode>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAAAAgAAAAAQAACAAAAAAA=</HashCode>
       <FileName>Models\HistoryManager.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CashTerminal.Models.MainModel" Collapsed="true">
-    <Position X="16" Y="1.5" Width="1.5" />
+    <Position X="7.25" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAgABAAAAAAAACEIAAAAgAACAAAAAAA=</HashCode>
+      <HashCode>AAAAAQAAAAAACAgAJAAAAAAAgAEIAAAAgAAAAAAQAAA=</HashCode>
       <FileName>Models\MainModel.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_port" />
+      <Property Name="Validator" />
+      <Property Name="Printer" />
+      <Property Name="DataBase" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Items" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="CashTerminal.Models.RawPrinter" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="14.25" Y="2.5" Width="1.5" />
+    <Position X="14.75" Y="1.25" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAACAAAAAAAgAAAAAAIAAAAAAAAAAAACAAAAQ=</HashCode>
+      <HashCode>AAAAgAAAACAAAAAAAEAAAAAAIAAAAAAAAAAAACAAAAQ=</HashCode>
       <FileName>Models\RawPrinter.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="CashTerminal.Models.SerialPortProvider" Collapsed="true">
-    <Position X="17.75" Y="2.5" Width="1.5" />
+    <Position X="10.25" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAgAAAAAAAAAA=</HashCode>
       <FileName>Models\SerialPortProvider.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CashTerminal.Models.SessionTimer" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="19.5" Y="2.5" Width="1.5" />
+    <Position X="9.5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAkBAAAIAAAAAAAgAAAQCAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\SessionTimer.cs</FileName>
@@ -117,9 +143,9 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="CashTerminal.Models.SettingsManager" Collapsed="true">
-    <Position X="21.25" Y="2.5" Width="1.5" />
+    <Position X="5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AIAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAQQAAA=</HashCode>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAQAAA=</HashCode>
       <FileName>Models\SettingsManager.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -139,10 +165,20 @@
   </Class>
   <Class Name="CashTerminal.ViewModels.MainViewModel" Collapsed="true">
     <Position X="7.25" Y="1.75" Width="1.5" />
+    <AssociationLine Name="Model" Type="CashTerminal.Models.MainModel">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.06" Y="0.516" />
+      </MemberNameLabel>
+    </AssociationLine>
     <TypeIdentifier>
-      <HashCode>BCEQEBAACAAkhMEBAgAgAEAAgBFAAAAgwQkCgAiEAAA=</HashCode>
+      <HashCode>BGAQARAACAAkhMEDAAAgAEBAgBFAAAAggYkCgACEAIA=</HashCode>
       <FileName>ViewModels\MainViewModel.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Model" />
+      <Property Name="Timer" />
+      <Property Name="Settings" />
+    </ShowAsAssociation>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="CashTerminal.ViewModels.SearchControlViewModel" Collapsed="true">
@@ -155,7 +191,7 @@
   <Class Name="CashTerminal.ViewModels.SettingsControlViewModel" Collapsed="true">
     <Position X="11.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAIAAAAAAAAIEAAAAAAAwAAAAAAAAAAAAAAQcAAA=</HashCode>
+      <HashCode>AAAAAIAAAAAAAAAEAAAAAAAQAAAAAAAAAAAAAgAUAAA=</HashCode>
       <FileName>ViewModels\SettingsControlViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -167,24 +203,34 @@
     </TypeIdentifier>
   </Class>
   <Class Name="CashTerminal.Views.MainView" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="17.75" Y="1.5" Width="1.5" />
+    <Position X="16.5" Y="5.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Views\MainView.xaml.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Interface Name="CashTerminal.Commons.IOverlayable" Collapsed="true">
-    <Position X="14.25" Y="4.75" Width="1.5" />
+  <Class Name="CashTerminal.Commons.UIMediator" Collapsed="true">
+    <Position X="14.75" Y="3.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAgAgAAAAEAAA=</HashCode>
+      <HashCode>AAQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAQ=</HashCode>
+      <FileName>Commons\UIMediator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="CashTerminal.Commons.IOverlayable" Collapsed="true">
+    <Position X="5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAAAAAAAAAAAAAAgAAAAAAAgAgAAAAEAAA=</HashCode>
       <FileName>Commons\IOverlayable.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Model" />
+    </ShowAsAssociation>
   </Interface>
   <Interface Name="CashTerminal.Models.IPrintable" Collapsed="true">
-    <Position X="16" Y="4.75" Width="1.5" />
+    <Position X="12" Y="6.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <HashCode>AAAAgAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
       <FileName>Models\IPrintable.cs</FileName>
     </TypeIdentifier>
   </Interface>

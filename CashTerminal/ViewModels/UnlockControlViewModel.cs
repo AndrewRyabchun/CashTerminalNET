@@ -18,6 +18,9 @@ namespace CashTerminal.ViewModels
         private string _username;
         private string _password;
 
+        /// <summary>
+        /// Комманда закрытия перекрытия.
+        /// </summary>
         public ICommand UnlockCommand { get; set; }
 
         public UnlockControlViewModel(IOverlayable parent)

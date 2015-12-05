@@ -26,9 +26,19 @@ namespace CashTerminal.ViewModels
         /// Логин пользователя
         /// </summary>
         public string UserName => "Пользователь: " + Model.Validator?.Username;
+        /// <summary>
+        /// Время сеанса.
+        /// </summary>
         public string Uptime => "Время сеанса: " + Timer.SessionTime.ToString(@"hh\:mm\:ss");
+        
+        /// <summary>
+        /// Записи сеанса покупки для DataGrid
+        /// </summary>
         public ObservableCollection<ArticleRecord> ArticleRecords => new ObservableCollection<ArticleRecord>(Model.Items);
 
+        /// <summary>
+        /// Строка статуса.
+        /// </summary>
         private string _status;
         public string StatusText
         {
@@ -40,6 +50,9 @@ namespace CashTerminal.ViewModels
             }
         }
 
+        /// <summary>
+        /// Индекс выбранного значения в DataGrid
+        /// </summary>
         private int _selectedIndex;
         public int SelectedIndex
         {
@@ -51,15 +64,26 @@ namespace CashTerminal.ViewModels
                 OnPropertyChanged("LastArticlePriceData");
             }
         }
+        /// <summary>
+        /// Свойство для поля ввода индекса.
+        /// </summary>
         public string ArticleID { get; set; }
+
+        /// <summary>
+        /// Общая стоимость чека
+        /// </summary>
         public string TotalValue
         {
             get
             {
                 var sum = (from item in Model.Items select item.FullPrice).Sum();
-                return string.Format("{0:F} грн.", sum);
+                return $"{sum:F} грн.";
             }
         }
+
+        /// <summary>
+        /// Увеличеное имя выбранной записи.
+        /// </summary>
         public string LastArticleName
         {
             get
@@ -72,6 +96,10 @@ namespace CashTerminal.ViewModels
                 return shortenName;
             }
         }
+
+        /// <summary>
+        /// Увеличенное представление стоимости выбраной записи
+        /// </summary>
         public string LastArticlePriceData
         {
             get
@@ -88,7 +116,7 @@ namespace CashTerminal.ViewModels
         /// </summary>
         public ObservableCollection<ViewModelBase> OverlayedControl { get; }
 
-        #region Commands
+        #region Commands - Комманды
 
         public ICommand LogoffCommand { get; set; }
         public ICommand LockCommand { get; set; }
@@ -111,6 +139,7 @@ namespace CashTerminal.ViewModels
             get { return OverlayedControl?.Count != 0 ? Visibility.Visible : Visibility.Collapsed; }
         }
 
+
         public SessionTimer Timer { get; }
         public SettingsManager Settings { get; }
         public MainModel Model { get; }
@@ -127,15 +156,15 @@ namespace CashTerminal.ViewModels
             Model = new MainModel();
             Model.PropertyChanged += (o, args) => { UpdateUI(); };
 
+            //установка стратегии
             Model.SetPrinter(new RawPrinter(80, ".txt"));
 
-            //init commands
+            //инициализация комманд
             LogoffCommand = new RelayCommand(Logoff);
             LockCommand = new RelayCommand(Lock);
             SettingsCommand = new RelayCommand(ShowSettings);
             LoggerCommand = new RelayCommand(ShowLog);
             SearchCommand = new RelayCommand(ShowSearch);
-
             ManuallyAddCommand = new RelayCommand(ManuallyAdd);
 
             CheckoutCommand = new RelayCommand(Checkout);
@@ -144,10 +173,12 @@ namespace CashTerminal.ViewModels
 
             UIMediator.Instance.Action = (str) => { StatusText = str; };
 
+
+            //Показ перекрытия логина.
             OverlayedControl = new ObservableCollection<ViewModelBase> { new LoginControlViewModel(this) };
         }
 
-        #region OverlayCommandHandlers
+        #region Обработчики комманд перекрытия
 
         public void Logoff(object obj)
         {
@@ -189,7 +220,7 @@ namespace CashTerminal.ViewModels
 
         #endregion
 
-        #region ModelCommandHandlers
+        #region Обработчики комманд модели
         private void ManuallyAdd(object obj)
         {
             long id;
@@ -258,7 +289,6 @@ namespace CashTerminal.ViewModels
             UpdateUI();
         }
         #endregion
-
 
 
         /// <summary>

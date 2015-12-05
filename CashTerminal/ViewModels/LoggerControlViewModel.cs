@@ -10,7 +10,14 @@ namespace CashTerminal.ViewModels
 {
     internal class LoggerControlViewModel : ViewModelBase
     {
+        /// <summary>
+        /// Комманда закрытия перекрытия.
+        /// </summary>
         public ICommand CloseCommand { get; set; }
+
+        /// <summary>
+        /// Комманда экспорта истории.
+        /// </summary>
         public ICommand ExportCommand { get; set; }
         public string LogText { get; }
 

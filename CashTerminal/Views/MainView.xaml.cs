@@ -10,6 +10,7 @@ namespace CashTerminal.Views
     {
         public MainView()
         {
+            // Установка локали ru-RU.
             CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("ru-RU");
             CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("ru-RU");
             InitializeComponent();
